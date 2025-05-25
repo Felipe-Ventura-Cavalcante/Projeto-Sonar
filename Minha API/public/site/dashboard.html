@@ -292,10 +292,10 @@
                 new Chart(graficBar, {
                     type: 'bar',
                     data: {
-                        labels: data,
+                        labels: data.reverse(),
                         datasets: [{
                             label: 'Interações na semana',
-                            data: semanas,
+                            data: semanas.reverse(),
                             borderWidth: 0,
                             backgroundColor: '#9b59b6'
                         }]

@@ -119,7 +119,7 @@
                     var descricao = post.descricao
                     var imagem_post = post.imagem_post
 
-                    if (imagem_post === 'null') {
+                    if (imagem_post === 'null' || imagem_post == undefined) {
                         container.innerHTML += `
                     <div class="exibicao" id="exibicao">
                     <div class="post">
@@ -395,7 +395,7 @@
         var descricaoUser = sessionStorage.DESCRICAO_USUARIO
         div_editar.innerHTML = `
         <input type="text" id="input_nova_desc" value="${descricaoUser}">
-        <button onclick="enviarDescNova()">ENVIAR</button>`
+        <button onclick="enviarDescNova()" class="enviar_bio">ENVIAR</button>`
     }
 
     function enviarDescNova() {

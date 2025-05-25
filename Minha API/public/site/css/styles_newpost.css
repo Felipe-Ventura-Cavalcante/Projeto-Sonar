@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
 
 
 * {
@@ -162,12 +162,12 @@ button:hover {
 }
 
 .card {
-    height: 600px;
     width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: #fff;
 }
 
 .titulo {
@@ -190,7 +190,7 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f3f3f3;
+    background-color: #2C2C2C;
     border-radius: 15px 15px 15px 15px;
 }
 
@@ -201,7 +201,7 @@ button:hover {
     align-items: center;
     margin-top: 10%;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .add_arquivo .imagem img {
@@ -218,7 +218,7 @@ button:hover {
 
 .add_arquivo .txt_add_arquivo {
     font-family: "Sofia Sans";
-    margin-bottom: 8%;
+    margin-bottom: 3%;
     font-size: 1.3rem;
 }
 
@@ -279,6 +279,15 @@ button:hover {
 }
 
 .botao_enviar {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao_bob {
+    z-index: 99999;
     height: 100%;
     width: 100px;
     display: flex;
@@ -286,9 +295,10 @@ button:hover {
 }
 
 .botao_enviar button {
-    background-color: #23E6A9;
+    width: 65%;
+    background-color: #38EF7D;
     font-family: "Keania One";
-    padding: 5%;
+    padding: 10px;
     font-size: 1.1rem;
     border: none;
     border-radius: 10px;
@@ -296,6 +306,7 @@ button:hover {
 }
 
 .tudo_certo {
+    margin-top: 10px;
     margin-bottom: 30px;
     color: red;
     font-size: 1.2rem;
@@ -307,26 +318,27 @@ button:hover {
 }
 
 .opcional-texto {
-    font-size: 0.85rem;
-    color: #666;
+    font-size: 0.rem;
+    color: #999898;
     margin-top: 5px;
     font-style: italic;
 }
 
 .bobIA {
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .bobIA button {
     width: 100%;
     background: none;
     border: none;
+    display: flex;
+    justify-content: center;
 }
 
 .bobIA button img {
-    width: 50px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 100px;
 }
 
 .IA {
@@ -334,19 +346,27 @@ button:hover {
     z-index: 999;
     width: 400px;
     right: 30px;
-    top: 50px;
-    background-color: #9b59b6;
+    top: 67px;
+    background-color: #1A1A2E;
     display: flex;
     flex-direction: column;
     padding: 10px;
-    border-radius: 10px;
+    padding-bottom: 0px;    
+    border-radius: 30px 0px 30px 0px;
     gap: 10px;
     align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Orbitron";
+    box-shadow: #1A1A2E 5px 5px 0px 5px;
+    color: #fff;
 }
 
 .IA h1 {
-    font-family: "Barlow";
+    display: flex;
+    justify-content: center;
+}
+
+.IA h1 img {
+    width: 150px;
 }
 
 .IA textarea {
@@ -354,6 +374,9 @@ button:hover {
     border-radius: 5px;
     padding: 5px;
     resize: none;
+    font-family: "Inter";
+    font-weight: 600;
+    border: none;
 }
 
 .IA button {
@@ -362,19 +385,21 @@ button:hover {
     width: 80%;
     padding: 5px;
     border-radius: 5px;
+    font-family: "Orbitron";
 }
 
 #resposta {
     background-color: #ffffff;
     border-radius: 10px;
-    padding: 5px;
+    padding: 12px;
     word-wrap: break-word;
-    /* quebra palavras longas */
     white-space: pre-wrap;
-    /* respeita \n e permite quebra de linha automática */
     overflow-wrap: break-word;
-    /* quebra palavras que excedem a largura */
     max-width: 100%;
+    font-family: "Inter";
+    font-weight: 600;
+    border-radius: 30px 0px 30px 0px;
+    color: #000;
 }
 
 .botao_copiar {

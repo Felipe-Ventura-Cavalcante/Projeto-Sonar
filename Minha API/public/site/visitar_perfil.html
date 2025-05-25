@@ -96,7 +96,7 @@
     <span><img src="../assets/imagens perfil/${imagem_perfilVisita}" alt=""></span>
             </div>
             <div class="info_perfil">
-                <div class="nome_do_usuario">
+                <div class="nome_do_usuario_visita">
                     ${nomeVisita}
                 </div>
 
@@ -128,7 +128,7 @@
                     var imagem_postVisita = post.imagem_post
                     console.log(imagem_postVisita)
 
-                    if (imagem_postVisita === undefined) {
+                    if (imagem_postVisita == "null" || imagem_postVisita == undefined) {
                         container.innerHTML += `
                     <div class="exibicao" id="exibicao">
                     <div class="post">

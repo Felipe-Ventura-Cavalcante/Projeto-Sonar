@@ -92,7 +92,7 @@
                     var imagem_post = post.imagem_post
                     var imagem_post_perfil = post.imagem_perfil
 
-                    if (imagem_post === 'null') {
+                    if (imagem_post === 'null' || imagem_post == undefined) {
                         container.innerHTML += `
                     <div class="exibicao" id="exibicao">
                     <div class="post">

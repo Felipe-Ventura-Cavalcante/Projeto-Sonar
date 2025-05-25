@@ -66,6 +66,7 @@ function dashCurtida(idUsuario) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
 }
+
 function dashComentario(idUsuario) {
     var instrucaoSql = `
     SELECT YEARWEEK(dtComentario) AS semana, 

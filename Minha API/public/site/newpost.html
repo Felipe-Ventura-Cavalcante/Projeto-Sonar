@@ -58,7 +58,7 @@
             <div class="add_arquivo">
 
                 <div class="imagem" id="imagem_post">
-                    <img src="assets/imgs/muitos_arquivos.png" alt="">
+                    <img src="assets/imgs/carregar_arquivo.svg" alt="">
 
                     <div class="txt_add_arquivo">
                         Adicione arquivos aqui
@@ -80,28 +80,30 @@
                     </div>
                     <textarea id="input_desc"></textarea>
                 </div>
+                <div class="botao_enviar">
+                    <button onclick="enviar()">
+                        POSTAR
+                    </button>
+                </div>
                 <div class="tudo_certo" id="tudo_certo"></div>
             </div>
 
         </div>
 
-        <div class="botao_enviar">
+        <div class="botao_bob">
             <div class="bobIA">
                 <button onclick="bob()">
-                    <img src="../assets/icon/bobIA_logo.png" alt="">
+                    <img src="assets/imgs/BobIA.png" alt="">
                 </button>
             </div>
-            <button onclick="enviar()">
-                ENVIAR
-            </button>
         </div>
 
         <div class="IA" id="div_IA" style="display: none;">
-            <h1>BOB IA</h1>
+            <h1><img src="assets/imgs/BobIA.png" alt=""></h1>
             <h3>Descreva o contexto do post</h3>
             <textarea id="pergunta" type="text" placeholder="Contexto do post..."></textarea>
-            <button onclick="gerarResposta()">Gerar comentário</button>
-            <h3>Comentário da IA:</h3>
+            <button onclick="gerarResposta()">Gerar Descrição</button>
+            <h3 style="color: white;">Descrição Feita pela IA:</h3>
             <div id="resposta"></div>
             <div class="botao_copiar">
                 <button onclick="copiarResposta()">
@@ -169,13 +171,12 @@
         var idUsuario = sessionStorage.ID_USUARIO
         var novaDesc = input_desc.value
 
-        if (novaDesc.value == "") {
+        if (novaDesc === "") {
             tudo_certo.innerHTML = `Preecha o campo descrição`
 
             setTimeout(() => {
                 tudo_certo.innerHTML = ``
             }, 4000)
-
         } else if (
             !foto.value.endsWith("") &&
             !foto.value.endsWith(".png") &&
@@ -249,7 +250,7 @@
         resposta.style.display = 'block'
         var html = ''
         pergunta.value = ``
-        
+
         for (var i = 0; i < texto.length; i++) {
 
             html += texto[i]
