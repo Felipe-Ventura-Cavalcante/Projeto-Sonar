@@ -199,7 +199,7 @@ footer {
   border-top: #000 solid 4px;
   display: flex;
   align-items: center;
-  background-color: #D9D9D9;
+  background-color: #121212;
 }
 
 .nos {
@@ -217,11 +217,12 @@ footer a {
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #000;
+  color: #fff;
 }
 
 .img_circulo img {
   object-fit: cover;
   border-radius: 50%;
+  border: #fff solid 1px;
 
 }

@@ -123,156 +123,161 @@
     var descricaoUser = sessionStorage.DESCRICAO_USUARIO
     var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
 
-    div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+    if (idUsuario === undefined) {
+        alert("Se cadastre e faça çogin com sua conta para acessar o conteúdo desse site")
+    } else {
+
+        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
         Olá, ${nomeUser}`
 
-    function exibir() {
-        var arquivo = foto.files[0] // pega o arquivo selecionado
-        // uniformiso a URL para deixar ela toda em minúsculo
-        var nomeArquivo = foto.value.toLowerCase();
+        function exibir() {
+            var arquivo = foto.files[0] // pega o arquivo selecionado
+            // uniformiso a URL para deixar ela toda em minúsculo
+            var nomeArquivo = foto.value.toLowerCase();
 
-        if (
-            !foto.value.endsWith(".png") &&
-            !foto.value.endsWith(".jpeg") &&
-            !foto.value.endsWith(".jpg") &&
-            !foto.value.endsWith(".gif") &&
-            !foto.value.endsWith(".webp") &&
-            !foto.value.endsWith(".mp4") &&
-            !foto.value.endsWith(".svg")) {
+            if (
+                !foto.value.endsWith(".png") &&
+                !foto.value.endsWith(".jpeg") &&
+                !foto.value.endsWith(".jpg") &&
+                !foto.value.endsWith(".gif") &&
+                !foto.value.endsWith(".webp") &&
+                !foto.value.endsWith(".mp4") &&
+                !foto.value.endsWith(".svg")) {
 
-            imagem_post.innerHTML = `<div class ="tudo_certo">Tipo de arquivo não suportado</div>`
-        } else if (arquivo) {
-            tudo_certo.innerHTML = ``
+                imagem_post.innerHTML = `<div class ="tudo_certo">Tipo de arquivo não suportado</div>`
+            } else if (arquivo) {
+                tudo_certo.innerHTML = ``
 
-            if (nomeArquivo.endsWith(".mp4")) {
-                // se for vídeo, transformo ele em URL para exibir a URL no search
-                var urlVideo = URL.createObjectURL(arquivo)
-                imagem_post.innerHTML = `
+                if (nomeArquivo.endsWith(".mp4")) {
+                    // se for vídeo, transformo ele em URL para exibir a URL no search
+                    var urlVideo = URL.createObjectURL(arquivo)
+                    imagem_post.innerHTML = `
                 <video controls>
                     <source src="${urlVideo}" type="video/mp4">
                     Seu navegador não suporta a reprodução de vídeo.
                 </video>`
-            } else {
-                // para imagem, usar FileReader e dataURL
-                var leitor = new FileReader()
+                } else {
+                    // para imagem, usar FileReader e dataURL
+                    var leitor = new FileReader()
 
-                leitor.onload = function (e) {
-                    imagem_post.innerHTML = `
+                    leitor.onload = function (e) {
+                        imagem_post.innerHTML = `
                     <img src="${e.target.result}" alt="Prévia da imagem">`
-                }
+                    }
 
-                leitor.readAsDataURL(arquivo)
+                    leitor.readAsDataURL(arquivo)
+                }
             }
         }
-    }
 
-    function enviar() {
-        console.log("Cheguei na função")
-        var idUsuario = sessionStorage.ID_USUARIO
-        var novaDesc = input_desc.value
+        function enviar() {
+            console.log("Cheguei na função")
+            var idUsuario = sessionStorage.ID_USUARIO
+            var novaDesc = input_desc.value
 
-        if (novaDesc === "") {
-            tudo_certo.innerHTML = `Preecha o campo descrição`
-
-            setTimeout(() => {
-                tudo_certo.innerHTML = ``
-            }, 4000)
-        } else if (
-            !foto.value.endsWith("") &&
-            !foto.value.endsWith(".png") &&
-            !foto.value.endsWith(".jpeg") &&
-            !foto.value.endsWith(".jpg") &&
-            !foto.value.endsWith(".gif") &&
-            !foto.value.endsWith(".webp") &&
-            !foto.value.endsWith(".mp4") &&
-            !foto.value.endsWith(".svg")) {
-
-            tudo_certo.innerHTML = `Nome do arquivo muito cumprido`
-
-            setTimeout(() => {
-                tudo_certo.innerHTML = ``
-            }, 5000)
-        } else {
-            console.log(idUsuario, foto.files[0], novaDesc)
-
-            const formData = new FormData()
-            formData.append('foto', foto.files[0])
-            formData.append('novaDescServer', novaDesc)
-            formData.append('idUsuario', idUsuario)
-
-            fetch("/newPost/enviarPost", {
-                method: "POST",
-                body: formData
-            }).then(res => {
-                console.log(res)
-
-                tudo_certo.innerHTML = `<p style="color: blue;">Post enviado com sucesso</p>`
+            if (novaDesc === "") {
+                tudo_certo.innerHTML = `Preecha o campo descrição`
 
                 setTimeout(() => {
-                    window.location = "explorer.html"
-                }, 1000)
+                    tudo_certo.innerHTML = ``
+                }, 4000)
+            } else if (
+                !foto.value.endsWith("") &&
+                !foto.value.endsWith(".png") &&
+                !foto.value.endsWith(".jpeg") &&
+                !foto.value.endsWith(".jpg") &&
+                !foto.value.endsWith(".gif") &&
+                !foto.value.endsWith(".webp") &&
+                !foto.value.endsWith(".mp4") &&
+                !foto.value.endsWith(".svg")) {
 
-            }).catch(err => {
-                console.log(erro)
-            })
-        }
-    }
+                tudo_certo.innerHTML = `Nome do arquivo muito cumprido`
 
+                setTimeout(() => {
+                    tudo_certo.innerHTML = ``
+                }, 5000)
+            } else {
+                console.log(idUsuario, foto.files[0], novaDesc)
 
-    var exibirIA = 0
-    function bob() {
-        if (exibirIA == 0) {
+                const formData = new FormData()
+                formData.append('foto', foto.files[0])
+                formData.append('novaDescServer', novaDesc)
+                formData.append('idUsuario', idUsuario)
 
-            div_IA.style.display = "flex"
-            exibirIA++
-        } else {
-            div_IA.style.display = "none"
-            exibirIA--
-        }
-    }
+                fetch("/newPost/enviarPost", {
+                    method: "POST",
+                    body: formData
+                }).then(res => {
+                    console.log(res)
 
-    async function gerarResposta() {
-        const pergunta = document.getElementById('pergunta');
-        const respostaDiv = document.getElementById('resposta');
-        respostaDiv.innerText = '';
+                    tudo_certo.innerHTML = `<p style="color: blue;">Post enviado com sucesso</p>`
 
-        const response = await fetch('/perguntar/pergunta', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ pergunta: pergunta.value })
-        });
+                    setTimeout(() => {
+                        window.location = "explorer.html"
+                    }, 1000)
 
-        const data = await response.json()
-        const texto = data.resultado;
-
-        resposta.style.display = 'block'
-        var html = ''
-        pergunta.value = ``
-
-        for (var i = 0; i < texto.length; i++) {
-
-            html += texto[i]
-
-            respostaDiv.innerHTML = html;
-            await new Promise(resolve => setTimeout(resolve, 30))
+                }).catch(err => {
+                    console.log(erro)
+                })
+            }
         }
 
-    }
 
-    function copiarResposta() {
-        var respostaDiv = document.getElementById('resposta');
+        var exibirIA = 0
+        function bob() {
+            if (exibirIA == 0) {
 
-        var texto = respostaDiv.innerText;
+                div_IA.style.display = "flex"
+                exibirIA++
+            } else {
+                div_IA.style.display = "none"
+                exibirIA--
+            }
+        }
 
-        navigator.clipboard.writeText(texto)
-    }
+        async function gerarResposta() {
+            const pergunta = document.getElementById('pergunta');
+            const respostaDiv = document.getElementById('resposta');
+            respostaDiv.innerText = '';
 
-    // função para finalizar sessão e voltar para a home
-    function sair() {
+            const response = await fetch('/perguntar/pergunta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ pergunta: pergunta.value })
+            });
 
-        sessionStorage.clear()
-        window.location = "../index.html"
+            const data = await response.json()
+            const texto = data.resultado;
+
+            resposta.style.display = 'block'
+            var html = ''
+            pergunta.value = ``
+
+            for (var i = 0; i < texto.length; i++) {
+
+                html += texto[i]
+
+                respostaDiv.innerHTML = html;
+                await new Promise(resolve => setTimeout(resolve, 30))
+            }
+
+        }
+
+        function copiarResposta() {
+            var respostaDiv = document.getElementById('resposta');
+
+            var texto = respostaDiv.innerText;
+
+            navigator.clipboard.writeText(texto)
+        }
+
+        // função para finalizar sessão e voltar para a home
+        function sair() {
+
+            sessionStorage.clear()
+            window.location = "../index.html"
+        }
     }
 </script>

@@ -63,37 +63,39 @@
     var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
     var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
 
-    console.log(idUsuario)
+    if (idUsuario === undefined) {
+        alert("Se cadastre e faça çogin com sua conta para acessar o conteúdo desse site")
+    } else {
 
-    div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
         <span>Olá, ${nomeUsuario}</span>`
 
-    window.onload = function () {
-        container.innerHTML = `
+        window.onload = function () {
+            container.innerHTML = `
         <div class="titulo_ex">
             <img src="assets/imgs/notas_mus_col.svg" alt="">
             Explorer
         </div>`
 
 
-        fetch("/explorer/listar")
-            .then(res => res.json())
-            .then(dados_post => {
+            fetch("/explorer/listar")
+                .then(res => res.json())
+                .then(dados_post => {
 
-                for (var i = 0; i < dados_post.length; i++) {
+                    for (var i = 0; i < dados_post.length; i++) {
 
-                    var post = dados_post[i]
+                        var post = dados_post[i]
 
-                    // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
-                    var nome = post.nome
-                    var quem_postou = post.quem_postou
-                    var idPost = post.idPost
-                    var descricao = post.descricao
-                    var imagem_post = post.imagem_post
-                    var imagem_post_perfil = post.imagem_perfil
+                        // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
+                        var nome = post.nome
+                        var quem_postou = post.quem_postou
+                        var idPost = post.idPost
+                        var descricao = post.descricao
+                        var imagem_post = post.imagem_post
+                        var imagem_post_perfil = post.imagem_perfil
 
-                    if (imagem_post === 'null' || imagem_post == undefined) {
-                        container.innerHTML += `
+                        if (imagem_post === 'null' || imagem_post == undefined) {
+                            container.innerHTML += `
                     <div class="exibicao" id="exibicao">
                     <div class="post">
 
@@ -139,9 +141,9 @@
                             <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
                             </div>
                     </div>`
-                    } else if (imagem_post.endsWith('.mp4')) {
+                        } else if (imagem_post.endsWith('.mp4')) {
 
-                        container.innerHTML += `
+                            container.innerHTML += `
                     <div class="exibicao" id="exibicao">
                     <div class="post">
 
@@ -194,8 +196,8 @@
                             <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
                             </div>
                     </div>`
-                    } else {
-                        container.innerHTML += `
+                        } else {
+                            container.innerHTML += `
                     <div class="exibicao" id="exibicao">
                     <div class="post">
 
@@ -245,144 +247,144 @@
                             <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
                             </div>
                     </div>`
+                        }
+                        qtd_curtida(idPost)
                     }
-                    qtd_curtida(idPost)
-                }
-                listarCurtida()
-            })
-
-
-    }
-
-    // Lista de curtida
-    function listarCurtida() {
-
-        fetch(`/curtida/listaCurtida/${idUsuario}`)
-            .then(res => res.json())
-            .then(lista_de_Curtida => {
-                console.log("Lista de curtidas recebida:", lista_de_Curtida);
-
-                for (var cont_lista_curtida = 0; cont_lista_curtida < lista_de_Curtida.length; cont_lista_curtida++) {
-
-                    var lista = lista_de_Curtida[cont_lista_curtida]
-
-                    var post_da_curtida = lista.post_curtida
-                    console.log(lista_de_Curtida)
-                    console.log(post_da_curtida)
-
-                    var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
-                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`
-                }
-            })
-            .catch((erro) => {
-
-                console.log(erro)
-            })
-    }
-
-    // Função de adicionar curtida
-    function curtida(idPost, quem_postou) {
-        var quem_postouVar = quem_postou
-
-        var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
-
-        // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
-        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coracao vermelho.svg" alt="">`)
-
-        // Se for true
-        if (curtida_coracao_vermelho) {
-
-            fetch(`/curtida/deletarCurtida/${idPost}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                }, body: JSON.stringify({
-
-                    idUsuarioServer: idUsuario,
-                    idPostServer: idPost,
-                })
-            }).then((res) => {
-                console.log(res)
-
-                div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao bordas vermelhas.png" alt="">`
-
-                listarCurtida()
-                qtd_curtida(idPost)
-            })
-        } else {
-
-            fetch(`/curtida/${idPost}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                }, body: JSON.stringify({
-
-                    idUsuarioServer: idUsuario,
-                    idPostServer: idPost,
-                    quem_postouServer: quem_postouVar
-                })
-            }).then(res => res.json())
-                .then(respostaCurtida => {
-
-                    console.log(respostaCurtida)
-                    console.log("Deu certo a curtida")
-
                     listarCurtida()
-                    qtd_curtida(idPost)
-                }).catch(erro => {
+                })
+
+
+        }
+
+        // Lista de curtida
+        function listarCurtida() {
+
+            fetch(`/curtida/listaCurtida/${idUsuario}`)
+                .then(res => res.json())
+                .then(lista_de_Curtida => {
+                    console.log("Lista de curtidas recebida:", lista_de_Curtida);
+
+                    for (var cont_lista_curtida = 0; cont_lista_curtida < lista_de_Curtida.length; cont_lista_curtida++) {
+
+                        var lista = lista_de_Curtida[cont_lista_curtida]
+
+                        var post_da_curtida = lista.post_curtida
+                        console.log(lista_de_Curtida)
+                        console.log(post_da_curtida)
+
+                        var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
+                        div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`
+                    }
+                })
+                .catch((erro) => {
 
                     console.log(erro)
                 })
         }
-    }
 
-    function qtd_curtida(idPost) {
-        console.log(`Função qtdCuritda: ${idPost}`)
+        // Função de adicionar curtida
+        function curtida(idPost, quem_postou) {
+            var quem_postouVar = quem_postou
 
-        fetch(`/curtida/qtdCurtida/${idPost}`)
-            .then((res) => res.json())
-            .then(quantidade => {
+            var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
 
-                var quantidade_curtida = quantidade[0]
-                var qtd = quantidade_curtida.qtd
+            // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
+            var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coracao vermelho.svg" alt="">`)
 
-                var div_qtd = document.getElementById(`qtd_curtida${idPost}`)
-                div_qtd.innerHTML = `${qtd} curtidas`
-            })
-    }
+            // Se for true
+            if (curtida_coracao_vermelho) {
 
-    // Função de listar comentário
-    var contador_comentário = 0
-    function comentario(idPost, quem_postou) {
+                fetch(`/curtida/deletarCurtida/${idPost}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    }, body: JSON.stringify({
 
-        var div_comentario = document.getElementById(`comentario_aberto${idPost}`)
-        var div = document.getElementById(`div_texto_comentario${idPost}`)
+                        idUsuarioServer: idUsuario,
+                        idPostServer: idPost,
+                    })
+                }).then((res) => {
+                    console.log(res)
 
-        // Seleciona todos os elementos HTML que tem essa classe
-        var todasDivsComentario = document.getElementsByClassName("texto_comentario")
-        for (var i = 0; i < todasDivsComentario.length; i++) {
+                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao bordas vermelhas.png" alt="">`
 
-            // Fecho todas as div de comentário que estão abertas
-            todasDivsComentario[i].innerHTML = "";
+                    listarCurtida()
+                    qtd_curtida(idPost)
+                })
+            } else {
 
-            // estou pegando o numero do contador e colocando no id da minha div
-            var idAtual = todasDivsComentario[i].id.replace("div_texto_comentario", "")
-            // estou pegando a div específica que tem esse id
-            var iconeComentario = document.getElementById(`comentario_aberto${idAtual}`)
+                fetch(`/curtida/${idPost}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    }, body: JSON.stringify({
 
-            if (iconeComentario) {
-                iconeComentario.innerHTML = `<img src="assets/imgs/chat.svg" alt="">`
+                        idUsuarioServer: idUsuario,
+                        idPostServer: idPost,
+                        quem_postouServer: quem_postouVar
+                    })
+                }).then(res => res.json())
+                    .then(respostaCurtida => {
+
+                        console.log(respostaCurtida)
+                        console.log("Deu certo a curtida")
+
+                        listarCurtida()
+                        qtd_curtida(idPost)
+                    }).catch(erro => {
+
+                        console.log(erro)
+                    })
             }
         }
 
+        function qtd_curtida(idPost) {
+            console.log(`Função qtdCuritda: ${idPost}`)
 
-        if (contador_comentário == 0) {
-
-            fetch(`/explorer/${idPost}`)
+            fetch(`/curtida/qtdCurtida/${idPost}`)
                 .then((res) => res.json())
-                .then(todos_os_comentarios => {
+                .then(quantidade => {
 
-                    div.innerHTML = `
+                    var quantidade_curtida = quantidade[0]
+                    var qtd = quantidade_curtida.qtd
+
+                    var div_qtd = document.getElementById(`qtd_curtida${idPost}`)
+                    div_qtd.innerHTML = `${qtd} curtidas`
+                })
+        }
+
+        // Função de listar comentário
+        var contador_comentário = 0
+        function comentario(idPost, quem_postou) {
+
+            var div_comentario = document.getElementById(`comentario_aberto${idPost}`)
+            var div = document.getElementById(`div_texto_comentario${idPost}`)
+
+            // Seleciona todos os elementos HTML que tem essa classe
+            var todasDivsComentario = document.getElementsByClassName("texto_comentario")
+            for (var i = 0; i < todasDivsComentario.length; i++) {
+
+                // Fecho todas as div de comentário que estão abertas
+                todasDivsComentario[i].innerHTML = "";
+
+                // estou pegando o numero do contador e colocando no id da minha div
+                var idAtual = todasDivsComentario[i].id.replace("div_texto_comentario", "")
+                // estou pegando a div específica que tem esse id
+                var iconeComentario = document.getElementById(`comentario_aberto${idAtual}`)
+
+                if (iconeComentario) {
+                    iconeComentario.innerHTML = `<img src="assets/imgs/chat.svg" alt="">`
+                }
+            }
+
+
+            if (contador_comentário == 0) {
+
+                fetch(`/explorer/${idPost}`)
+                    .then((res) => res.json())
+                    .then(todos_os_comentarios => {
+
+                        div.innerHTML = `
                     <div class="titulo_comentario1">
                         <img src="assets/imgs/comentario_ponto.svg" alt="">
                             Comentários (${todos_os_comentarios.length})
@@ -403,18 +405,18 @@
 
                         </div>`
 
-                    if (todos_os_comentarios.length > 0) {
+                        if (todos_os_comentarios.length > 0) {
 
-                        div_comentario.innerHTML = `<img src="assets/imgs/chat_branco.svg" alt="">`
+                            div_comentario.innerHTML = `<img src="assets/imgs/chat_branco.svg" alt="">`
 
 
-                        for (var cont = 0; cont < todos_os_comentarios.length; cont++) {
-                            var comentario = todos_os_comentarios[cont]
-                            var txt_comentario = comentario.texto_comentario
-                            var nome_quem_comentou = comentario.nome
-                            var imagem_perfil_comentario = comentario.imagem_perfil
+                            for (var cont = 0; cont < todos_os_comentarios.length; cont++) {
+                                var comentario = todos_os_comentarios[cont]
+                                var txt_comentario = comentario.texto_comentario
+                                var nome_quem_comentou = comentario.nome
+                                var imagem_perfil_comentario = comentario.imagem_perfil
 
-                            div.innerHTML += `
+                                div.innerHTML += `
                     <div class="texto_dos_comentarios">
 
                         <div class="nome_quem_comentou">
@@ -427,71 +429,73 @@
                         </div>
 
                     </div>`
-                        }
-                    } else {
-                        div_comentario.innerHTML = `<img src="assets/imgs/chat_branco.svg" alt="">`
+                            }
+                        } else {
+                            div_comentario.innerHTML = `<img src="assets/imgs/chat_branco.svg" alt="">`
 
-                        div.innerHTML += `
+                            div.innerHTML += `
                     <div class="texto_dos_comentarios"> 
                         Esse post não tem nenhum comentário
                     </div>`
-                    }
+                        }
 
+                    })
+
+                contador_comentário++
+            }
+            else {
+                div_comentario.innerHTML = `<img src="assets/imgs/chat.svg" alt="">`
+                div.innerHTML = ``
+                contador_comentário--
+            }
+        }
+
+        // Função de Adicionar um novo comentário
+        function enviar_comentario(idPost, quem_postou) {
+
+            var novo_comentario = input_add_comentario.value
+            var quem_postouVar = quem_postou
+
+            fetch(`/explorer/novoComentario/${idPost}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                // Transformo os dados em Json pois o servidor espera dados em JSON
+                body: JSON.stringify({
+
+                    idUsuarioServer: idUsuario,
+                    idPostServer: idPost,
+                    novo_comentarioServer: novo_comentario,
+                    quem_postouServer: quem_postouVar
                 })
+            }).then(() => {
+                console.log("Comentário enviado com sucesso")
 
-            contador_comentário++
-        }
-        else {
-            div_comentario.innerHTML = `<img src="assets/imgs/chat.svg" alt="">`
-            div.innerHTML = ``
-            contador_comentário--
-        }
-    }
+                input_add_comentario.value = ""
+                contador_comentário = 0
+                comentario(idPost, quem_postou)
+            }).catch(function (erro) {
 
-    // Função de Adicionar um novo comentário
-    function enviar_comentario(idPost, quem_postou) {
-
-        var novo_comentario = input_add_comentario.value
-        var quem_postouVar = quem_postou
-
-        fetch(`/explorer/novoComentario/${idPost}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            // Transformo os dados em Json pois o servidor espera dados em JSON
-            body: JSON.stringify({
-
-                idUsuarioServer: idUsuario,
-                idPostServer: idPost,
-                novo_comentarioServer: novo_comentario,
-                quem_postouServer: quem_postouVar
+                console.log("Erro ao adicionar comentario")
+                console.log(erro)
             })
-        }).then(() => {
-            console.log("Comentário enviado com sucesso")
-
-            input_add_comentario.value = ""
-            contador_comentário = 0
-            comentario(idPost, quem_postou)
-        }).catch(function (erro) {
-
-            console.log("Erro ao adicionar comentario")
-            console.log(erro)
-        })
-    }
+        }
 
 
 
 
-    function buscar_perfil(quem_postou) {
-        sessionStorage.PERFIL_CONVIDADO = quem_postou
-        window.location = "visitar_perfil.html"
-    }
+        function buscar_perfil(quem_postou) {
+            sessionStorage.PERFIL_CONVIDADO = quem_postou
+            window.location = "visitar_perfil.html"
+        }
 
-    // função para finalizar sessão e voltar para a home
-    function sair() {
+        // função para finalizar sessão e voltar para a home
+        function sair() {
 
-        sessionStorage.clear()
-        window.location = "../index.html"
+            sessionStorage.clear()
+            window.location = "../index.html"
+        }
+
     }
 </script>

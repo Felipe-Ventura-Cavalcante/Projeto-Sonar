@@ -126,208 +126,213 @@
     var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
     var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
 
-    window.onload = function () {
-        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+    if (idUsuario === undefined) {
+        alert("Se cadastre e faça çogin com sua conta para acessar o conteúdo desse site")
+    } else {
+
+        window.onload = function () {
+            div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
             <span>Olá, ${nomeUsuario}</span>`
 
-        fetch(`/dashboard/post/${idUsuario}`)
-            .then(res => res.json())
-            .then(posts => {
+            fetch(`/dashboard/post/${idUsuario}`)
+                .then(res => res.json())
+                .then(posts => {
 
-                if (posts.length >= 2) {
-                    var atual = posts[0].qtd_post
-                    var anterior = posts[1].qtd_post
+                    if (posts.length >= 2) {
+                        var atual = posts[0].qtd_post
+                        var anterior = posts[1].qtd_post
 
-                    var mensagem = ''
-                    var imagem_status = ''
+                        var mensagem = ''
+                        var imagem_status = ''
 
-                    if (atual > anterior) {
-                        imagem_status = 'assets/imgs/seta_verde.svg'
-                        mensagem = `<span>${atual} postagens nesta semana (${atual} é mais que ${anterior})<span>`
-                    } else if (atual < anterior) {
-                        imagem_status = 'assets/imgs/seta_vermelha.svg'
-                        mensagem = `<span class="vermelho">${atual} postagens nesta semana (menos que os ${anterior} da semana anterior)</span>`;
-                    } else {
-                        imagem_status = 'assets/imgs/igual.svg'
-                        mensagem = `${atual} postagens nesta semana (mesma quantidade da anterior)`
-                    }
+                        if (atual > anterior) {
+                            imagem_status = 'assets/imgs/seta_verde.svg'
+                            mensagem = `<span>${atual} postagens nesta semana (${atual} é mais que ${anterior})<span>`
+                        } else if (atual < anterior) {
+                            imagem_status = 'assets/imgs/seta_vermelha.svg'
+                            mensagem = `<span class="vermelho">${atual} postagens nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                        } else {
+                            imagem_status = 'assets/imgs/igual.svg'
+                            mensagem = `${atual} postagens nesta semana (mesma quantidade da anterior)`
+                        }
 
-                    status_qtd_postagens.innerHTML = `
+                        status_qtd_postagens.innerHTML = `
                             <img src="${imagem_status}" alt="">
                             ${mensagem}`
 
-                } else if (posts.length === 1) {
-                    status_qtd_postagens.innerHTML = `
+                    } else if (posts.length === 1) {
+                        status_qtd_postagens.innerHTML = `
                     <img src="assets/imgs/seta_verde.svg" alt="">
                     <span>${posts[0].qtd_post} postagens nesta primeira semana</span>`
-                } else {
-                    status_qtd_postagens.innerHTML = `
+                    } else {
+                        status_qtd_postagens.innerHTML = `
                     <img src="assets/imgs/igual.svg" alt="">
                     Nenhuma postagem registrada até agora.`
-                }
-            })
-
-        fetch(`/dashboard/curtida/${idUsuario}`)
-            .then(res => res.json())
-            .then(curtidas => {
-                if (curtidas.length >= 2) {
-                    var atual = curtidas[0].qtd_curtida
-                    var anterior = curtidas[1].qtd_curtida
-
-                    var mensagem = ''
-                    var imagem_status = ''
-
-                    if (atual > anterior) {
-                        imagem_status = 'assets/imgs/seta_verde.svg'
-                        mensagem = `<span>${atual} curtidas nesta semana (${atual} é mais que ${anterior})</span>`
-                    } else if (atual < anterior) {
-                        imagem_status = 'assets/imgs/seta_vermelha.svg'
-                        mensagem = `<span class="vermelho">${atual} curtidas nesta semana (menos que os ${anterior} da semana anterior)</span>`;
-                    } else {
-                        imagem_status = 'assets/imgs/igual.svg'
-                        mensagem = `${atual} curtidas nesta semana (mesma quantidade da anterior)`
                     }
+                })
 
-                    status_qtd_curtidas.innerHTML = `
+            fetch(`/dashboard/curtida/${idUsuario}`)
+                .then(res => res.json())
+                .then(curtidas => {
+                    if (curtidas.length >= 2) {
+                        var atual = curtidas[0].qtd_curtida
+                        var anterior = curtidas[1].qtd_curtida
+
+                        var mensagem = ''
+                        var imagem_status = ''
+
+                        if (atual > anterior) {
+                            imagem_status = 'assets/imgs/seta_verde.svg'
+                            mensagem = `<span>${atual} curtidas nesta semana (${atual} é mais que ${anterior})</span>`
+                        } else if (atual < anterior) {
+                            imagem_status = 'assets/imgs/seta_vermelha.svg'
+                            mensagem = `<span class="vermelho">${atual} curtidas nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                        } else {
+                            imagem_status = 'assets/imgs/igual.svg'
+                            mensagem = `${atual} curtidas nesta semana (mesma quantidade da anterior)`
+                        }
+
+                        status_qtd_curtidas.innerHTML = `
                             <img src="${imagem_status}" alt="">
                             ${mensagem}`
 
-                } else if (curtidas.length === 1) {
-                    status_qtd_curtidas.innerHTML = `
+                    } else if (curtidas.length === 1) {
+                        status_qtd_curtidas.innerHTML = `
                     <img src="assets/imgs/seta_verde.svg" alt="">
                     <span>${curtidas[0].qtd_curtida} curtidas nesta primeira semana</span>
                 `
-                } else {
-                    status_qtd_curtidas.innerHTML = `
+                    } else {
+                        status_qtd_curtidas.innerHTML = `
                     <img src="assets/imgs/igual.svg" alt="">
                     Nenhuma curtida registrada até agora.`
-                }
-            })
-
-        fetch(`/dashboard/comentario/${idUsuario}`)
-            .then(res => res.json())
-            .then(comentarios => {
-                if (comentarios.length >= 2) {
-                    var atual = comentarios[0].qtd_comentario
-                    var anterior = comentarios[1].qtd_comentario
-
-                    var mensagem = ''
-                    var imagem_status = ''
-
-                    if (atual > anterior) {
-                        imagem_status = 'assets/imgs/seta_verde.svg'
-                        mensagem = `<span>${atual} comentarios nesta semana (${atual} é mais que ${anterior})</span>`
-                    } else if (atual < anterior) {
-                        imagem_status = 'assets/imgs/seta_vermelha.svg'
-                        mensagem = `<span class="vermelho">${atual} comentários nesta semana (menos que os ${anterior} da semana anterior)</span>`;
-                    } else {
-                        imagem_status = 'assets/imgs/igual.svg'
-                        mensagem = `${atual} comentarios nesta semana (mesma quantidade da anterior)`
                     }
+                })
 
-                    status_qtd_comentarios.innerHTML = `
+            fetch(`/dashboard/comentario/${idUsuario}`)
+                .then(res => res.json())
+                .then(comentarios => {
+                    if (comentarios.length >= 2) {
+                        var atual = comentarios[0].qtd_comentario
+                        var anterior = comentarios[1].qtd_comentario
+
+                        var mensagem = ''
+                        var imagem_status = ''
+
+                        if (atual > anterior) {
+                            imagem_status = 'assets/imgs/seta_verde.svg'
+                            mensagem = `<span>${atual} comentarios nesta semana (${atual} é mais que ${anterior})</span>`
+                        } else if (atual < anterior) {
+                            imagem_status = 'assets/imgs/seta_vermelha.svg'
+                            mensagem = `<span class="vermelho">${atual} comentários nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                        } else {
+                            imagem_status = 'assets/imgs/igual.svg'
+                            mensagem = `${atual} comentarios nesta semana (mesma quantidade da anterior)`
+                        }
+
+                        status_qtd_comentarios.innerHTML = `
                             <img src="${imagem_status}" alt="">
                             ${mensagem}`
 
-                } else if (comentarios.length === 1) {
-                    status_qtd_comentarios.innerHTML = `
+                    } else if (comentarios.length === 1) {
+                        status_qtd_comentarios.innerHTML = `
                     <img src="assets/imgs/seta_verde.svg" alt="">
                     <span>${comentarios[0].qtd_comentario} comentarios nesta primeira semana</span>`
-                } else {
-                    status_qtd_comentarios.innerHTML = `
+                    } else {
+                        status_qtd_comentarios.innerHTML = `
                     <img src="assets/imgs/igual.svg" alt="">
                     Nenhum comentário registrada até agora.`
-                }
-            })
+                    }
+                })
 
-        fetch(`/dashboard/listarPost/${idUsuario}`)
-            .then(res => res.json())
-            .then(todos_post => {
-                qtd_post.innerHTML = todos_post[0].qtd_post
-            })
+            fetch(`/dashboard/listarPost/${idUsuario}`)
+                .then(res => res.json())
+                .then(todos_post => {
+                    qtd_post.innerHTML = todos_post[0].qtd_post
+                })
 
-        fetch(`/dashboard/listarCurtida/${idUsuario}`)
-            .then(res => res.json())
-            .then(todas_curtida => {
-                qtd_curtida.innerHTML = todas_curtida[0].qtd_curtida
-            })
+            fetch(`/dashboard/listarCurtida/${idUsuario}`)
+                .then(res => res.json())
+                .then(todas_curtida => {
+                    qtd_curtida.innerHTML = todas_curtida[0].qtd_curtida
+                })
 
-        fetch(`/dashboard/listarComentario/${idUsuario}`)
-            .then(res => res.json())
-            .then(todos_comentario => {
-                qtd_comentario.innerHTML = todos_comentario[0].qtd_comentario
-            })
+            fetch(`/dashboard/listarComentario/${idUsuario}`)
+                .then(res => res.json())
+                .then(todos_comentario => {
+                    qtd_comentario.innerHTML = todos_comentario[0].qtd_comentario
+                })
 
-        dados_dash()
-    }
+            dados_dash()
+        }
 
-    function dados_dash() {
-        var semanas = [0, 0, 0, 0, 0, 0]
-        var data = ["", "", "", "", "", ""]
+        function dados_dash() {
+            var semanas = [0, 0, 0, 0, 0, 0]
+            var data = ["", "", "", "", "", ""]
 
-        fetch(`/dashboard/dashCurtida/${idUsuario}`)
-            .then(res => res.json())
-            .then(dados_curtida => {
-                console.log(dados_curtida)
-                for (var i = dados_curtida.length - 1; i >= 0; i--) {
-                    semanas[i] += dados_curtida[i].qtd_curtida
-                    data[i] = dados_curtida[i].semana
-                }
-                console.log(semanas)
-                console.log(data)
-            })
+            fetch(`/dashboard/dashCurtida/${idUsuario}`)
+                .then(res => res.json())
+                .then(dados_curtida => {
+                    console.log(dados_curtida)
+                    for (var i = dados_curtida.length - 1; i >= 0; i--) {
+                        semanas[i] += dados_curtida[i].qtd_curtida
+                        data[i] = dados_curtida[i].semana
+                    }
+                    console.log(semanas)
+                    console.log(data)
+                })
 
-        fetch(`/dashboard/dashComentario/${idUsuario}`)
-            .then(res => res.json())
-            .then(dados_comentario => {
-                console.log(dados_comentario)
-                for (var i = dados_comentario.length - 1; i >= 0; i--) {
-                    semanas[i] += dados_comentario[i].qtd_comentario
-                    data[i] = dados_comentario[i].semana
-                }
-                console.log(semanas)
-                console.log(data)
+            fetch(`/dashboard/dashComentario/${idUsuario}`)
+                .then(res => res.json())
+                .then(dados_comentario => {
+                    console.log(dados_comentario)
+                    for (var i = dados_comentario.length - 1; i >= 0; i--) {
+                        semanas[i] += dados_comentario[i].qtd_comentario
+                        data[i] = dados_comentario[i].semana
+                    }
+                    console.log(semanas)
+                    console.log(data)
 
-                const graficBar = document.getElementById('myChart');
-                new Chart(graficBar, {
-                    type: 'bar',
-                    data: {
-                        labels: data.reverse(),
-                        datasets: [{
-                            label: 'Interações na semana',
-                            data: semanas.reverse(),
-                            borderWidth: 0,
-                            backgroundColor: '#9b59b6'
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    color: '#333333'
+                    const graficBar = document.getElementById('myChart');
+                    new Chart(graficBar, {
+                        type: 'bar',
+                        data: {
+                            labels: data.reverse(),
+                            datasets: [{
+                                label: 'Interações na semana',
+                                data: semanas.reverse(),
+                                borderWidth: 0,
+                                backgroundColor: '#9b59b6'
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        color: '#333333'
+                                    },
+                                    grid: {
+                                        color: '#cccccc'
+                                    }
                                 },
-                                grid: {
-                                    color: '#cccccc'
-                                }
-                            },
-                            x: {
-                                ticks: {
-                                    color: '#333333'
-                                },
-                                grid: {
-                                    color: '#e0e0e0'
+                                x: {
+                                    ticks: {
+                                        color: '#333333'
+                                    },
+                                    grid: {
+                                        color: '#e0e0e0'
+                                    }
                                 }
                             }
                         }
-                    }
+                    })
                 })
-            })
 
-    }
+        }
 
-    function sair() {
-        sessionStorage.clear()
-        window.location = "../index.html"
+        function sair() {
+            sessionStorage.clear()
+            window.location = "../index.html"
+        }
     }
 </script>
