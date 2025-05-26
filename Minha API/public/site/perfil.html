@@ -312,58 +312,54 @@
 
         // Função de adicionar curtida
         function curtida(idPost, quem_postou) {
-            var quem_postouVar = quem_postou
+            var div = document.getElementById(`condCurtida${idPost}`);
+            var jaCurtiu = div.dataset.curtido === "true";
 
-            var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
-
-            // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
-            var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coracao vermelho.svg" alt="">`)
-
-            // Se for true
-            if (curtida_coracao_vermelho) {
-
+            if (jaCurtiu) {
                 fetch(`/curtida/deletarCurtida/${idPost}`, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    }, body: JSON.stringify({
-
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        idUsuarioServer: idUsuario,
+                        idPostServer: idPost
+                    })
+                }).then(() => {
+                    div.innerHTML = `<img src="assets/imgs/coracao bordas vermelhas.png" alt="">`;
+                    div.dataset.curtido = "false";
+                    listarCurtida()
+                    qtd_curtida(idPost)
+                });
+            } else {
+                fetch(`/curtida/${idPost}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
                         idUsuarioServer: idUsuario,
                         idPostServer: idPost,
+                        quem_postouServer: quem_postou
                     })
-                }).then((res) => {
-                    console.log(res)
-
-                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao bordas vermelhas.png" alt="">`
-
+                }).then(() => {
+                    div.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`;
+                    div.dataset.curtido = "true";
                     listarCurtida()
                     qtd_curtida(idPost)
                 })
-            } else {
-
-                fetch(`/curtida/${idPost}`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    }, body: JSON.stringify({
-
-                        idUsuarioServer: idUsuario,
-                        idPostServer: idPost,
-                        quem_postouServer: quem_postouVar
-                    })
-                }).then(res => res.json())
-                    .then(respostaCurtida => {
-
-                        console.log(respostaCurtida)
-                        console.log("Deu certo a curtida")
-
-                        listarCurtida()
-                        qtd_curtida(idPost)
-                    }).catch(erro => {
-
-                        console.log(erro)
-                    })
             }
+        }
+
+        function qtd_curtida(idPost) {
+            console.log(`Função qtdCuritda: ${idPost}`)
+
+            fetch(`/curtida/qtdCurtida/${idPost}`)
+                .then((res) => res.json())
+                .then(quantidade => {
+
+                    var quantidade_curtida = quantidade[0]
+                    var qtd = quantidade_curtida.qtd
+
+                    var div_qtd = document.getElementById(`qtd_curtida${idPost}`)
+                    div_qtd.innerHTML = `${qtd} curtidas`
+                })
         }
 
         function qtd_curtida(idPost) {

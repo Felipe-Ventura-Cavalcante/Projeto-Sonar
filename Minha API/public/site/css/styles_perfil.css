@@ -306,9 +306,9 @@ button {
     padding: 2%;
     display: flex;
     justify-content: center;
-    color: #D9D9D9;
+    color: #fff;
     border-top: #d9d9d9 solid 5px;
-    color: #D9D9D9;
+    color: #fff;
 }
 
 .exibicao_post {
@@ -329,9 +329,8 @@ button {
     align-items: center;
     background-color: #2A2A2A;
     border-radius: 15px;
-    color: #fff;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: 500;
+    color: #fff;
 }
 
 .post {
@@ -361,11 +360,20 @@ button {
     align-items: center;
     gap: 10px;
     margin-left: 15px;
+    color: #fff;
+}
+
+.post_user button {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffffff;
 }
 
 .post_user img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -390,6 +398,7 @@ button {
 
 .qtd_curtida {
     display: flex;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .curtida img {
@@ -455,16 +464,12 @@ button {
 }
 
 .titulo_comentario {
-    width: 100%;
-    margin-right: 30px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    width: auto;
+    margin-right: 10px;
 }
 
 .adicionar_comentario textarea {
     display: flex;
-    text-align: start;
     min-width: 600px;
     max-width: 600px;
     background: none;
@@ -473,6 +478,8 @@ button {
     color: #ffffffff;
     resize: none;
     padding: 2px;
+    line-height: 25px;
+    font-size: 1.1rem;
 }
 
 .adicionar_comentario button {

@@ -36,7 +36,7 @@ button:hover {
 .bar_new a,
 .bar_e a,
 .bar_sair button {
-    transition: .3s;
+  transition: .3s;
 }
 
 .bar_nome_user a .div_nome_user:hover,
@@ -44,8 +44,8 @@ button:hover {
 .bar_new a:hover,
 .bar_e a:hover,
 .bar_sair button:hover {
-    transform: scale(1.1);
-    cursor: pointer;
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .bar_lateral {
@@ -289,16 +289,12 @@ button:hover {
 }
 
 .titulo_comentario {
-  width: 100%;
-  margin-right: 30px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  width: auto;
+  margin-right: 10px;
 }
 
 .adicionar_comentario textarea {
   display: flex;
-  text-align: start;
   min-width: 600px;
   max-width: 600px;
   background: none;
@@ -307,6 +303,8 @@ button:hover {
   color: #ffffffff;
   resize: none;
   padding: 2px;
+  line-height: 25px;
+  font-size: 1.1rem;
 }
 
 .adicionar_comentario button {

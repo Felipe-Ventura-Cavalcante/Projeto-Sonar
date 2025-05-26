@@ -222,7 +222,6 @@
             }
         }
 
-
         var exibirIA = 0
         function bob() {
             if (exibirIA == 0) {
@@ -235,36 +234,6 @@
             }
         }
 
-        async function gerarResposta() {
-            const pergunta = document.getElementById('pergunta');
-            const respostaDiv = document.getElementById('resposta');
-            respostaDiv.innerText = '';
-
-            const response = await fetch('/perguntar/pergunta', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ pergunta: pergunta.value })
-            });
-
-            const data = await response.json()
-            const texto = data.resultado;
-
-            resposta.style.display = 'block'
-            var html = ''
-            pergunta.value = ``
-
-            for (var i = 0; i < texto.length; i++) {
-
-                html += texto[i]
-
-                respostaDiv.innerHTML = html;
-                await new Promise(resolve => setTimeout(resolve, 30))
-            }
-
-        }
-
         function copiarResposta() {
             var respostaDiv = document.getElementById('resposta');
 
@@ -273,11 +242,42 @@
             navigator.clipboard.writeText(texto)
         }
 
-        // função para finalizar sessão e voltar para a home
         function sair() {
 
             sessionStorage.clear()
             window.location = "../index.html"
         }
     }
+
+    async function gerarResposta() {
+        const pergunta = document.getElementById('pergunta');
+        const respostaDiv = document.getElementById('resposta');
+        respostaDiv.innerText = '';
+
+        const response = await fetch('/perguntar/pergunta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ pergunta: pergunta.value })
+        });
+
+        const data = await response.json()
+        const texto = data.resultado;
+
+        resposta.style.display = 'block'
+        var html = ''
+        pergunta.value = ``
+
+        for (var i = 0; i < texto.length; i++) {
+
+            html += texto[i]
+
+            respostaDiv.innerHTML = html;
+            await new Promise(resolve => setTimeout(resolve, 30))
+        }
+
+    }
+
+
 </script>

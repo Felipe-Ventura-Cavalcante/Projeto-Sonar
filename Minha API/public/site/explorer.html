@@ -86,7 +86,6 @@
 
                         var post = dados_post[i]
 
-                        // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
                         var nome = post.nome
                         var quem_postou = post.quem_postou
                         var idPost = post.idPost
@@ -258,26 +257,23 @@
 
         // Lista de curtida
         function listarCurtida() {
-
             fetch(`/curtida/listaCurtida/${idUsuario}`)
                 .then(res => res.json())
                 .then(lista_de_Curtida => {
-                    console.log("Lista de curtidas recebida:", lista_de_Curtida);
+                    console.log("Lista de curtidas recebida:", lista_de_Curtida)
 
                     for (var cont_lista_curtida = 0; cont_lista_curtida < lista_de_Curtida.length; cont_lista_curtida++) {
 
                         var lista = lista_de_Curtida[cont_lista_curtida]
-
                         var post_da_curtida = lista.post_curtida
-                        console.log(lista_de_Curtida)
-                        console.log(post_da_curtida)
 
                         var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
-                        div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`
+                        if (div_cond_curtida) {
+                            div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`
+                        }
                     }
                 })
                 .catch((erro) => {
-
                     console.log(erro)
                 })
         }
