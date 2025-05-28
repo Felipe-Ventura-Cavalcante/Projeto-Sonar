@@ -162,7 +162,7 @@ function listarComentario(req, res) {
     }
 }
 
-function dashCurtida(req, res) {
+function dash(req, res) {
 
     var idUsuario = req.params.id
 
@@ -170,7 +170,7 @@ function dashCurtida(req, res) {
         res.status(400).sendo("Seu idUsuario está indefinido")
     } else {
 
-        dashboardModel.dashCurtida(idUsuario)
+        dashboardModel.dash(idUsuario)
 
             .then(
                 function (resultado) {
@@ -180,33 +180,7 @@ function dashCurtida(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao realizar a lista de comentario! Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage)
-                }
-            )
-    }
-}
-function dashComentario(req, res) {
-
-    var idUsuario = req.params.id
-
-    if (idUsuario == undefined) {
-        res.status(400).sendo("Seu idUsuario está indefinido")
-    } else {
-
-        dashboardModel.dashComentario(idUsuario)
-
-            .then(
-                function (resultado) {
-                    res.json(resultado)
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao realizar a lista de comentario! Erro: ",
+                        "\nHouve um erro ao realizar a lista de interações! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage)
@@ -223,6 +197,5 @@ module.exports = {
     listarPost,
     listarCurtida,
     listarComentario,
-    dashCurtida,
-    dashComentario
+    dash
 }

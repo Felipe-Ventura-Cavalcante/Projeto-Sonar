@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    margin: auto;
+    max-width: 1900px;
+    height: 100%;
+    background-color: #121212;
+}
+
+button {
+    transition: .3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.bar_nome_user a .div_nome_user,
+.bar_p_e a,
+.bar_new a,
+.bar_e a,
+.bar_sair button {
+    transition: .3s;
+}
+
+.bar_nome_user a .div_nome_user:hover,
+.bar_p_e a:hover,
+.bar_new a:hover,
+.bar_e a:hover,
+.bar_sair button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.bar_lateral {
+    position: absolute;
+    position: fixed;
+    font-family: "Arial";
+    z-index: 999;
+    width: 300px;
+    height: 100%;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    color: #ffffffff;
+    background-color: #121212;
+    box-shadow: #2a2a2a2a 10px 10px 10px 10px;
+}
+
+.bar_lateral button {
+    background: none;
+    border: none;
+}
+
+.bar_titulo {
+    font-family: "Keania One";
+    font-size: 2rem;
+    width: 100%;
+    display: flex;
+}
+
+
+.bar_nome_user a .div_nome_user {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    height: auto;
+    color: #ffffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 50px;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar_p_e a,
+.bar_e a,
+.bar_new a,
+.bar_sair button {
+    color: #ffffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.bar_p_e a {
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar_e a {
+    width: 180px;
+    border-bottom: #ffffffff solid 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.bar_new a,
+.bar_e a,
+.bar_sair button,
+.div_nome_user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.bar_p,
+.bar_new {
+    margin-top: 10px;
+}
+
+.bar_sair {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.bar_lateral img {
+    width: 30px;
+}
+
+.container {
+    width: 95%;
+    padding-left: 280px;
+    display: flex;
+    flex-direction: column;
+    color: #ffffffff;
+    align-items: center;
+    position: relative;
+}
+
+.titulo {
+    width: 100%;
+    font-size: 2rem;
+    font-weight: bolder;
+    padding: 50px;
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: "Poppins";
+    font-weight: 600;
+}
+.titulo img {
+    width: 100px;
+}
+
+.exibicao {
+    display: flex;
+    justify-content: flex-start;
+    width: 800px;
+    padding: 15px;
+    align-items: center;
+    background-color: #2A2A2A;
+    border-radius: 10px;
+    font-family: "Inter";
+    margin-bottom: 10px;
+
+}
+
+.exibicao img {
+    width: 40px;
+}
+
+.exibicao a {
+    width: 100%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.enviar_arquivo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 999;
+    top: 100px;
+    left: 1280px;
+    position: fixed;
+}
+
+.enviar_arquivo button {
+    display: flex;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-size: 1.8rem;
+    border: none;
+    background-color: #fff;
+    border-radius: 10px;
+    font-family: "inter";
+}
+
+.formulario_addArquivo {
+    width: 500px;
+    background-color: aliceblue;
+    color: #121212;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    padding: 10px;
+    gap: 20px;
+    font-family: "Poppins";
+    font-weight: 700;
+    position: absolute;
+    z-index: 999;
+    top: 200px;
+    position: fixed;
+}
+
+.formulario_addArquivo input {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario_addArquivo button {
+    background-color: #121212;
+    color: #fff;
+    width: 200px;
+    padding: 5px;
+    border-radius: 10px;
+}

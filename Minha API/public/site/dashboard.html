@@ -40,6 +40,12 @@
                 ESTATÍSTICAS
             </a>
         </div>
+        <div class="bar_new">
+            <a href="dashboard.html">
+                <img src="assets/imgs/forum.png" alt="">
+                FÓRUM
+            </a>
+        </div>
         <div class="bar_sair">
             <button onclick="sair()">
                 <img src="assets/imgs/sair.svg" alt="">
@@ -127,7 +133,7 @@
     var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
 
     if (idUsuario === undefined) {
-        alert("Se cadastre e faça çogin com sua conta para acessar o conteúdo desse site")
+        alert("Se cadastre e faça login com sua conta para acessar o conteúdo desse site")
     } else {
 
         window.onload = function () {
@@ -266,68 +272,52 @@
         }
 
         function dados_dash() {
-            var semanas = [0, 0, 0, 0, 0, 0]
-            var data = ["", "", "", "", "", ""]
-
-            fetch(`/dashboard/dashCurtida/${idUsuario}`)
+            fetch(`/dashboard/dash/${idUsuario}`)
                 .then(res => res.json())
-                .then(dados_curtida => {
-                    console.log(dados_curtida)
-                    for (var i = dados_curtida.length - 1; i >= 0; i--) {
-                        semanas[i] += dados_curtida[i].qtd_curtida
-                        data[i] = dados_curtida[i].semana
-                    }
-                    console.log(semanas)
-                    console.log(data)
-                })
+                .then(dados_interacoes => {
+                    var semanas = [];
+                    var curtidas = [];
+                    var comentarios = [];
 
-            fetch(`/dashboard/dashComentario/${idUsuario}`)
-                .then(res => res.json())
-                .then(dados_comentario => {
-                    console.log(dados_comentario)
-                    for (var i = dados_comentario.length - 1; i >= 0; i--) {
-                        semanas[i] += dados_comentario[i].qtd_comentario
-                        data[i] = dados_comentario[i].semana
+                    for (var i = dados_interacoes.length - 1; i >= 0; i--) {
+                        semanas.push(dados_interacoes[i].semana);
+                        curtidas.push(dados_interacoes[i].qtd_curtida);
+                        comentarios.push(dados_interacoes[i].qtd_comentario);
                     }
-                    console.log(semanas)
-                    console.log(data)
 
-                    const graficBar = document.getElementById('myChart');
-                    new Chart(graficBar, {
-                        type: 'bar',
+                    var grafico = document.getElementById('myChart');
+
+                    new Chart(grafico, {
+                        type: "bar",
                         data: {
-                            labels: data.reverse(),
-                            datasets: [{
-                                label: 'Interações na semana',
-                                data: semanas.reverse(),
-                                borderWidth: 0,
-                                backgroundColor: '#9b59b6'
-                            }]
+                            labels: semanas,
+                            datasets: [
+                                {
+                                    label: "Curtidas",
+                                    data: curtidas,
+                                    backgroundColor: "#00b579",
+                                    borderRadius: 5
+                                },
+                                {
+                                    label: "Comentários",
+                                    data: comentarios,
+                                    backgroundColor: "#8b00b5",
+                                    borderRadius: 5
+                                }
+                            ]
                         },
                         options: {
                             scales: {
                                 y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        color: '#333333'
-                                    },
-                                    grid: {
-                                        color: '#cccccc'
-                                    }
-                                },
-                                x: {
-                                    ticks: {
-                                        color: '#333333'
-                                    },
-                                    grid: {
-                                        color: '#e0e0e0'
-                                    }
+                                    beginAtZero: true
                                 }
                             }
                         }
-                    })
+                    });
                 })
-
+                .catch(erro => {
+                    console.error("Erro ao carregar dados da dashboard:", erro);
+                });
         }
 
         function sair() {

@@ -40,6 +40,12 @@
                 ESTATÍSTICAS
             </a>
         </div>
+        <div class="bar_new">
+            <a href="dashboard.html">
+                <img src="assets/imgs/forum.png" alt="">
+                FÓRUM
+            </a>
+        </div>
         <div class="bar_sair">
             <button onclick="sair()">
                 <img src="assets/imgs/sair.svg" alt="">
@@ -55,8 +61,6 @@
 </html>
 <script>
 
-    // Para exibir o nome do usuario logado
-    // utilizamos o dado da sessão do login
     var idUsuario = sessionStorage.ID_USUARIO
     var nomeUsuario = sessionStorage.NOME_USUARIO
     var email = sessionStorage.EMAIL_USUARIO
@@ -64,7 +68,7 @@
     var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
 
     if (idUsuario === undefined) {
-        alert("Se cadastre e faça çogin com sua conta para acessar o conteúdo desse site")
+        alert("Se cadastre e faça login com sua conta para acessar o conteúdo desse site")
     } else {
 
         div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
@@ -255,7 +259,6 @@
 
         }
 
-        // Lista de curtida
         function listarCurtida() {
             fetch(`/curtida/listaCurtida/${idUsuario}`)
                 .then(res => res.json())
@@ -278,16 +281,13 @@
                 })
         }
 
-        // Função de adicionar curtida
         function curtida(idPost, quem_postou) {
             var quem_postouVar = quem_postou
 
             var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
 
-            // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
             var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coracao vermelho.svg" alt="">`)
 
-            // Se for true
             if (curtida_coracao_vermelho) {
 
                 fetch(`/curtida/deletarCurtida/${idPost}`, {
@@ -349,30 +349,25 @@
                 })
         }
 
-        // Função de listar comentário
         var contador_comentário = 0
         function comentario(idPost, quem_postou) {
 
             var div_comentario = document.getElementById(`comentario_aberto${idPost}`)
             var div = document.getElementById(`div_texto_comentario${idPost}`)
 
-            // Seleciona todos os elementos HTML que tem essa classe
             var todasDivsComentario = document.getElementsByClassName("texto_comentario")
             for (var i = 0; i < todasDivsComentario.length; i++) {
 
-                // Fecho todas as div de comentário que estão abertas
                 todasDivsComentario[i].innerHTML = "";
 
-                // estou pegando o numero do contador e colocando no id da minha div
                 var idAtual = todasDivsComentario[i].id.replace("div_texto_comentario", "")
-                // estou pegando a div específica que tem esse id
+
                 var iconeComentario = document.getElementById(`comentario_aberto${idAtual}`)
 
                 if (iconeComentario) {
                     iconeComentario.innerHTML = `<img src="assets/imgs/chat.svg" alt="">`
                 }
             }
-
 
             if (contador_comentário == 0) {
 
@@ -446,7 +441,6 @@
             }
         }
 
-        // Função de Adicionar um novo comentário
         function enviar_comentario(idPost, quem_postou) {
 
             var novo_comentario = input_add_comentario.value
@@ -457,7 +451,7 @@
                 headers: {
                     "Content-Type": "application/json",
                 },
-                // Transformo os dados em Json pois o servidor espera dados em JSON
+
                 body: JSON.stringify({
 
                     idUsuarioServer: idUsuario,
@@ -478,15 +472,11 @@
             })
         }
 
-
-
-
         function buscar_perfil(quem_postou) {
             sessionStorage.PERFIL_CONVIDADO = quem_postou
             window.location = "visitar_perfil.html"
         }
 
-        // função para finalizar sessão e voltar para a home
         function sair() {
 
             sessionStorage.clear()

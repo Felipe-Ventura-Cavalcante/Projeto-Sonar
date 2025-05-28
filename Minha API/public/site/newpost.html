@@ -40,6 +40,12 @@
                 ESTATÍSTICAS
             </a>
         </div>
+        <div class="bar_new">
+            <a href="dashboard.html">
+                <img src="assets/imgs/forum.png" alt="">
+                FÓRUM
+            </a>
+        </div>
         <div class="bar_sair">
             <button onclick="sair()">
                 <img src="assets/imgs/sair.svg" alt="">
@@ -124,7 +130,7 @@
     var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
 
     if (idUsuario === undefined) {
-        alert("Se cadastre e faça çogin com sua conta para acessar o conteúdo desse site")
+        alert("Se cadastre e faça login com sua conta para acessar o conteúdo desse site")
     } else {
 
         div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
@@ -276,8 +282,5 @@
             respostaDiv.innerHTML = html;
             await new Promise(resolve => setTimeout(resolve, 30))
         }
-
     }
-
-
 </script>

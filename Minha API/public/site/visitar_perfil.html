@@ -39,6 +39,12 @@
                 ESTATÍSTICAS
             </a>
         </div>
+        <div class="bar_new">
+            <a href="dashboard.html">
+                <img src="assets/imgs/forum.png" alt="">
+                FÓRUM
+            </a>
+        </div>
         <div class="bar_sair">
             <button onclick="sair()">
                 <img src="assets/imgs/sair.svg" alt="">
@@ -76,9 +82,8 @@
     var imagem_perfilVisita = ""
 
     if (idUsuario === undefined) {
-        alert("Se cadastre e faça çogin com sua conta para acessar o conteúdo desse site")
+        alert("Se cadastre e faça login com sua conta para acessar o conteúdo desse site")
     } else {
-
 
         window.onload = function () {
 
@@ -125,7 +130,6 @@
 
                         var post = dados_post[i]
 
-                        // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
                         var nomeVisita = post.nome
                         var quem_postouVisita = post.quem_postou
                         var idPostVisita = post.idPost
@@ -292,39 +296,35 @@
 
         }
 
-        // Lista de curtida
-function listarCurtida() {
-    fetch(`/curtida/listaCurtida/${idUsuario}`)
-        .then(res => res.json())
-        .then(lista_de_Curtida => {
-            console.log("Lista de curtidas recebida:", lista_de_Curtida)
+        function listarCurtida() {
+            fetch(`/curtida/listaCurtida/${idUsuario}`)
+                .then(res => res.json())
+                .then(lista_de_Curtida => {
+                    console.log("Lista de curtidas recebida:", lista_de_Curtida)
 
-            for (var cont_lista_curtida = 0; cont_lista_curtida < lista_de_Curtida.length; cont_lista_curtida++) {
+                    for (var cont_lista_curtida = 0; cont_lista_curtida < lista_de_Curtida.length; cont_lista_curtida++) {
 
-                var lista = lista_de_Curtida[cont_lista_curtida]
-                var post_da_curtida = lista.post_curtida;
+                        var lista = lista_de_Curtida[cont_lista_curtida]
+                        var post_da_curtida = lista.post_curtida;
 
-                var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
-                if (div_cond_curtida) {
-                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`
-                }
-            }
-        })
-        .catch((erro) => {
-            console.log(erro)
-        })
-}
+                        var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
+                        if (div_cond_curtida) {
+                            div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`
+                        }
+                    }
+                })
+                .catch((erro) => {
+                    console.log(erro)
+                })
+        }
 
-        // Função de adicionar curtida
         function curtida(idPost, quem_postou) {
             var quem_postouVar = quem_postou
 
             var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
 
-            // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
             var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coracao vermelho.svg" alt="">`)
 
-            // Se for true
             if (curtida_coracao_vermelho) {
 
                 fetch(`/curtida/deletarCurtida/${idPost}`, {
@@ -386,23 +386,19 @@ function listarCurtida() {
                 })
         }
 
-        // Função de listar comentário
         var contador_comentário = 0
         function comentario(idPostVisita, quem_postou) {
 
             var div_comentario = document.getElementById(`comentario_aberto${idPostVisita}`)
             var div = document.getElementById(`div_texto_comentario${idPostVisita}`)
 
-            // Seleciona todos os elementos HTML que tem essa classe
             var todasDivsComentario = document.getElementsByClassName("texto_comentario");
             for (var i = 0; i < todasDivsComentario.length; i++) {
 
-                // Fecho todas as div de comentário que estão abertas
                 todasDivsComentario[i].innerHTML = "";
 
-                // estou pegando o numero do contador e colocando no id da minha div
                 var idAtual = todasDivsComentario[i].id.replace("div_texto_comentario", "");
-                // estou pegando a div específica que tem esse id
+
                 var iconeComentario = document.getElementById(`comentario_aberto${idAtual}`);
 
                 if (iconeComentario) {
@@ -483,7 +479,6 @@ function listarCurtida() {
             }
         }
 
-        // Função de Adicionar um novo comentário
         function enviar_comentario(idPostVisita, quem_postou) {
 
             var novo_comentario = input_add_comentario.value
@@ -494,7 +489,6 @@ function listarCurtida() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                // Transformo os dados em Json pois o servidor espera dados em JSON
                 body: JSON.stringify({
 
                     idUsuarioServer: idUsuario,

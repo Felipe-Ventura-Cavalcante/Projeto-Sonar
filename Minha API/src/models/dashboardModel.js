@@ -54,27 +54,29 @@ function listarComentario(idUsuario) {
     return database.executar(instrucaoSql)
 }
 
-function dashCurtida(idUsuario) {
+function dash(idUsuario) {
     var instrucaoSql = `
-        SELECT YEARWEEK(dtCurtida) AS semana, 
-    COUNT(*) AS qtd_curtida 
-    FROM curtida 
-    WHERE quem_postou = ${idUsuario}
-    GROUP BY semana 
-    ORDER BY semana DESC LIMIT 6;`
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql)
-    return database.executar(instrucaoSql)
-}
-
-function dashComentario(idUsuario) {
-    var instrucaoSql = `
-    SELECT YEARWEEK(dtComentario) AS semana, 
-    COUNT(*) AS qtd_comentario
-    FROM comentario
-    WHERE quem_postou = ${idUsuario}
-    GROUP BY semana
-    ORDER BY semana DESC LIMIT 6;`
+           SELECT semana,
+		SUM(qtd_curtida) AS qtd_curtida,
+		SUM(qtd_comentario) AS qtd_comentario
+			FROM (SELECT 
+			YEARWEEK(dtCurtida) AS semana,
+			COUNT(*) AS qtd_curtida,
+			0 AS qtd_comentario
+		FROM curtida
+		WHERE quem_postou = ${idUsuario}
+		GROUP BY semana
+		UNION
+		SELECT 
+			YEARWEEK(dtComentario) AS semana,
+			0 AS qtd_curtida,
+			COUNT(*) AS qtd_comentario
+		FROM comentario
+		WHERE quem_postou = ${idUsuario}
+		GROUP BY semana) AS interacoes
+	GROUP BY semana
+	ORDER BY semana DESC
+	LIMIT 6;`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -87,6 +89,5 @@ module.exports = {
     listarPost,
     listarCurtida,
     listarComentario,
-    dashCurtida,
-    dashComentario
+    dash
 }

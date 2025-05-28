@@ -29,11 +29,8 @@ router.get("/listarComentario/:id", function (req, res) {
 })
 
 
-router.get("/dashCurtida/:id", function (req, res) {
-    dashboardController.dashCurtida(req, res)
-})
-router.get("/dashComentario/:id", function (req, res) {
-    dashboardController.dashComentario(req, res)
+router.get("/dash/:id", function (req, res) {
+    dashboardController.dash(req, res)
 })
 
 module.exports = router

@@ -18,14 +18,15 @@ var HOST_APP = process.env.APP_HOST;
 
 var app = express()
 
-var usuarioRouter = require("./src/routes/usuario")
-var explorerRouter = require("./src/routes/explorer")
-var perfilRouter = require("./src/routes/perfil")
-var curtidaRouter = require("./src/routes/curtida")
+var usuarioRouter = require("./src/routes/usuario");
+var explorerRouter = require("./src/routes/explorer");
+var perfilRouter = require("./src/routes/perfil");
+var curtidaRouter = require("./src/routes/curtida");
 var newPostRouter = require("./src/routes/newPost");
 var fotoPerfilRouter = require("./src/routes/fotoPerfil");
 var dashboardRouter = require("./src/routes/dashboard");
-var bobIARouter = require("./src/routes/perguntar")
+var bobIARouter = require("./src/routes/perguntar");
+var forumRouter = require("./src/routes/forum");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -46,6 +47,7 @@ app.use("/newPost", newPostRouter)
 app.use("/fotoPerfil", fotoPerfilRouter)
 app.use("/dashboard", dashboardRouter)
 app.use("/perguntar", bobIARouter)
+app.use("/forum", forumRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`

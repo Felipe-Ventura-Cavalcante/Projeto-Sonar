@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style_forum.css">
+</head>
+
+<body>
+    <div class="bar_lateral">
+        <div class="bar_titulo">
+            SONAR
+        </div>
+        <div class="bar_nome_user">
+            <a href="perfil.html">
+                <div class="div_nome_user" id="div_nome_user">
+                    <img src="assets/imgs/perfil.svg" alt="">
+                    NOME USER
+                </div>
+            </a>
+        </div>
+        <div class="bar_p_e">
+            <a href="explorer.html">
+                <img src="assets/imgs/casa_branco.svg" alt="">
+                EXPLORER
+            </a>
+        </div>
+        <div class="bar_new">
+            <a href="newpost.html">
+                <img src="assets/imgs/new.svg" alt="">
+                NEW POST
+            </a>
+        </div>
+        <div class="bar_new">
+            <a href="dashboard.html">
+                <img src="assets/imgs/estatistica.svg" alt="">
+                ESTATÍSTICAS
+            </a>
+        </div>
+        <div class="bar_new">
+            <a href="dashboard.html">
+                <img src="assets/imgs/forum.png" alt="">
+                FÓRUM
+            </a>
+        </div>
+        <div class="bar_sair">
+            <button onclick="sair()">
+                <img src="assets/imgs/sair.svg" alt="">
+                SAIR
+            </button>
+        </div>
+    </div>
+
+    <div class="container" id="container">
+        <div class="titulo">
+            <img src="assets/imgs/partitura.png" alt="">
+            FÓRUM DE PARTITURAS
+        </div>
+        <div id="exibicao_arquivos">
+        </div>
+        <div class="enviar_arquivo" id="enviar_arquivo">
+            <button onclick="adicionar()">
+                +
+            </button>
+        </div>
+        <div class="formulario_addArquivo" id="formulario_addArquivo" style="display: none;">
+            <div class="titulo_formulario">
+                ADICIONE O SEU ARQUIVO
+            </div>
+            <input type="file" id="arquivo_pdf">
+            <textarea id="input_descricao"></textarea>
+            <div class="botao">
+                <button onclick="enviar()">
+                    ENVIAR
+                </button>
+            </div>
+            <div id="tudo_certo"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var idUsuario = sessionStorage.ID_USUARIO
+    var nomeUsuario = sessionStorage.NOME_USUARIO
+    var email = sessionStorage.EMAIL_USUARIO
+    var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
+    var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
+
+    window.onload = function () {
+
+        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+        <span>Olá, ${nomeUsuario}</span>`
+
+        listar()
+    }
+
+    function listar() {
+
+        fetch(`/forum/listarArquivos_pdf`)
+            .then(res => res.json())
+            .then(dados_arquivos => {
+                console.log(`Esses são os dados: ${dados_arquivos}`)
+
+                if (dados_arquivos.length == 0) {
+                    exibicao_arquivos.innerHTML = `
+                    <div id="exibicao" class="exibicao">
+                        AINDA NÃO POSSUI NENHUMA PUBLICAÇÃO DE ARQUIVOS
+                    </div>`
+                } else {
+                    exibicao_arquivos.innerHTM = ``
+
+                    for (var i = 0; i < dados_arquivos.length; i++) {
+                        var nome_doArquivo = dados_arquivos[i].nome
+                        var extencaoArquivo = dados_arquivos[i].extencao
+                        var idArquivo = dados_arquivos[i].idArquivo
+
+                        console.log(nome_doArquivo)
+                        exibicao_arquivos.innerHTML +=
+                            `<div id="idArquivo${idArquivo}" class="exibicao">
+                                <a href="../assets/arquivos_pdf/${extencaoArquivo}" download>
+                                    <img src="assets/imgs/logo_pdf.png" alt="">
+                                        ${nome_doArquivo}
+                                </a>
+                            </div>`
+                    }
+
+                }
+            })
+    }
+
+    var contador_card = 0
+    function adicionar() {
+
+        if (contador_card == 0) {
+
+            formulario_addArquivo.style.display = "flex"
+            contador_card++
+
+            enviar_arquivo.innerHTML = `
+             <button onclick="adicionar()">
+                x
+            </button>`
+        } else {
+            formulario_addArquivo.style.display = "none"
+            contador_card--
+            enviar_arquivo.innerHTML = `
+             <button onclick="adicionar()">
+                +
+            </button>`
+        }
+    }
+
+    function enviar() {
+        input_descricao
+
+        if (arquivo_pdf.value === "") {
+            tudo_certo.innerHTML = `Preecha o campo descrição`
+
+            setTimeout(() => {
+                tudo_certo.innerHTML = ``
+            }, 4000)
+        } else if (
+            !arquivo_pdf.value.endsWith(".pdf")) {
+
+            tudo_certo.innerHTML = `Apenas arquivos PDF`
+
+            setTimeout(() => {
+                tudo_certo.innerHTML = ``
+            }, 5000)
+        } else {
+            console.log(arquivo_pdf.files[0])
+
+            const formData = new FormData()
+            formData.append('arquivo_pdf', arquivo_pdf.files[0])
+            formData.append('idUsuarioServer', idUsuario)
+            formData.append('descricaoServer', input_descricao.value)
+
+            fetch("/forum/enviarPdf", {
+                method: "POST",
+                body: formData
+            }).then(res => {
+                console.log(res)
+
+                tudo_certo.innerHTML = `<p style="color: blue;">Arquivo enviado com sucesso</p>`
+
+                setTimeout(() => {
+                    adicionar()
+                    listar()
+                }, 1000)
+
+            }).catch(err => {
+                console.log(erro)
+            })
+        }
+    }
+
+</script>

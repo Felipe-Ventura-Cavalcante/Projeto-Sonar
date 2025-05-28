@@ -39,6 +39,12 @@
                 ESTATÍSTICAS
             </a>
         </div>
+        <div class="bar_new">
+            <a href="dashboard.html">
+                <img src="assets/imgs/forum.png" alt="">
+                FÓRUM
+            </a>
+        </div>
         <div class="bar_sair">
             <button onclick="sair()">
                 <img src="assets/imgs/sair.svg" alt="">
@@ -73,7 +79,7 @@
     var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
 
     if (idUsuario === undefined) {
-        alert("Se cadastre e faça çogin com sua conta para acessar o conteúdo desse site")
+        alert("Se cadastre e faça login com sua conta para acessar o conteúdo desse site")
     } else {
 
         window.onload = function () {
@@ -116,7 +122,6 @@
 
                         var post = dados_post[i]
 
-                        // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
                         var nome = post.nome
                         var quem_postou = post.quem_postou
                         var idPost = post.idPost
@@ -282,7 +287,6 @@
 
         }
 
-        // Lista de curtida
         function listarCurtida() {
 
             fetch(`/curtida/listaCurtida/${idUsuario}`)
@@ -310,7 +314,6 @@
                 )
         }
 
-        // Função de adicionar curtida
         function curtida(idPost, quem_postou) {
             var div = document.getElementById(`condCurtida${idPost}`);
             var jaCurtiu = div.dataset.curtido === "true";
@@ -426,7 +429,6 @@
             div_editar.innerHTML = ``
         }
 
-        // Função de listar comentário
         var contador_comentário = 0
         function comentario(idPost, quem_postou) {
 
@@ -523,7 +525,6 @@
             }
         }
 
-        // Função de Adicionar um novo comentário
         function enviar_comentario(idPost, quem_postou) {
 
             var novo_comentario = input_add_comentario.value
@@ -534,7 +535,6 @@
                 headers: {
                     "Content-Type": "application/json",
                 },
-                // Transformo os dados em Json pois o servidor espera dados em JSON
                 body: JSON.stringify({
 
                     idUsuarioServer: idUsuario,
