@@ -22,6 +22,9 @@ body {
     max-width: 1900px;
     height: 100%;
     background-color: #121212;
+    background-image: url(../assets/imgs/fundo.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 button {
@@ -71,7 +74,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     color: #ffffffff;
-    background-color: #121212;
+    background-color: #1515125e;
     box-shadow: #2a2a2a2a 10px 10px 10px 10px;
 }
 
