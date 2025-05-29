@@ -55,11 +55,21 @@ CONSTRAINT fkquem_postou_c
 		REFERENCES post(quem_postou)
 );
 
+CREATE TABLE arquivos (
+idArquivo INT auto_increment,
+quem_postou INT,
+nome VARCHAR(60),
+extencao TEXT,
+PRIMARY KEY (idArquivo, quem_postou),
+CONSTRAINT fkUsuarioQuem_postou
+	FOREIGN KEY (quem_postou)
+		REFERENCES usuario(idUsuario)
+);
+select * from arquivos;
 select * from usuario;
 select * from post;
 select * from curtida;
 select * from comentario;
-
 
 INSERT INTO usuario (nome, email, senha, descricao, imagem_perfil) VALUES
 ('Alice', 'alice@email.com', '1234', 'Usuária ativa', 'perfil_anonimo.jpeg'),
@@ -114,7 +124,6 @@ INSERT INTO comentario (usuario_que_comentou, post_comentado, quem_postou, texto
 (2, 2, 1, 'Legal!', '2024-04-08'),
 (2, 5, 1, 'Gostei!', '2024-04-29');
 
-
 -- Alice continua postando semanalmente (já inserido antes)
 -- Adicionando mais postagens para Bob e Carlos
 
@@ -132,7 +141,6 @@ INSERT INTO post (quem_postou, descricao, dtPostagem, imagem_post) VALUES
 (3, 'Post semana 4', '2024-04-22', NULL),
 (3, 'Post semana 5', '2024-04-29', NULL),
 (3, 'Post semana 6', '2024-05-06', NULL);
-
 
 -- Alice curte os posts do Bob e Carlos
 INSERT INTO curtida (quem_curtiu, post_curtida, quem_postou, dtCurtida) VALUES
@@ -153,8 +161,6 @@ INSERT INTO curtida (quem_curtiu, post_curtida, quem_postou, dtCurtida) VALUES
 (3, 11, 2, '2024-04-23'),
 (3, 10, 2, '2024-04-16');
 
-
-
 -- Alice comenta nos posts do Carlos
 INSERT INTO comentario (usuario_que_comentou, post_comentado, quem_postou, texto_comentario, dtComentario) VALUES
 (1, 12, 3, 'Muito bom!', '2024-04-08'),
@@ -169,17 +175,3 @@ INSERT INTO comentario (usuario_que_comentou, post_comentado, quem_postou, texto
 INSERT INTO comentario (usuario_que_comentou, post_comentado, quem_postou, texto_comentario, dtComentario) VALUES
 (3, 9, 2, 'Comentando aqui.', '2024-04-09'),
 (3, 11, 2, 'Interessante...', '2024-04-23');
-
-    SELECT YEARWEEK(dtComentario) AS semana, 
-    COUNT(*) AS qtd_comentario
-    FROM comentario
-    WHERE quem_postou = 2
-    GROUP BY semana
-    ORDER BY semana DESC LIMIT 6;
-
-SELECT YEARWEEK(dtCurtida) AS semana, 
-    COUNT(*) AS qtd_curtida 
-    FROM curtida 
-    WHERE quem_postou = 2
-    GROUP BY semana 
-    ORDER BY semana DESC LIMIT 6;

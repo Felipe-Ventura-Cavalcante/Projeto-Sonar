@@ -25,6 +25,12 @@ body {
 }
 
 button {
+    background: none;
+    border: none;
+}
+
+
+button {
     transition: .3s;
 }
 
@@ -33,10 +39,12 @@ button:hover {
     cursor: pointer;
 }
 
+
 .bar_nome_user a .div_nome_user,
 .bar_p_e a,
 .bar_new a,
 .bar_e a,
+.bar_forum a,
 .bar_sair button {
     transition: .3s;
 }
@@ -45,6 +53,7 @@ button:hover {
 .bar_p_e a:hover,
 .bar_new a:hover,
 .bar_e a:hover,
+.bar_forum a:hover,
 .bar_sair button:hover {
     transform: scale(1.1);
     cursor: pointer;
@@ -53,7 +62,8 @@ button:hover {
 .bar_lateral {
     position: absolute;
     position: fixed;
-    font-family: "Arial";
+    font-family: "Inter";
+    font-weight: 600;
     z-index: 999;
     width: 300px;
     height: 100%;
@@ -65,11 +75,6 @@ button:hover {
     box-shadow: #2a2a2a2a 10px 10px 10px 10px;
 }
 
-.bar_lateral button {
-    background: none;
-    border: none;
-}
-
 .bar_titulo {
     font-family: "Keania One";
     font-size: 2rem;
@@ -77,9 +82,7 @@ button:hover {
     display: flex;
 }
 
-
 .bar_nome_user a .div_nome_user {
-    font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     height: auto;
     color: #ffffffff;
@@ -96,44 +99,46 @@ button:hover {
 }
 
 .bar_p_e a,
-.bar_e a,
+.bar_forum a,
 .bar_new a,
 .bar_sair button {
     color: #ffffffff;
     font-size: 1.2rem;
     font-weight: 500;
-    cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
 
+    cursor: pointer;
 }
 
 .bar_p_e a {
+    width: 150px;
     margin-top: 150px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.bar_e a {
-    width: 180px;
-    border-bottom: #ffffffff solid 2px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
 .bar_new a,
-.bar_e a,
 .bar_sair button,
 .div_nome_user {
     display: flex;
     align-items: center;
     gap: 10px;
+}
 
+.bar_forum a {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+    border-radius: 10px;
 }
 
 .bar_p,
+.bar_forum,
 .bar_new {
     margin-top: 10px;
 }
@@ -146,6 +151,10 @@ button:hover {
 
 .bar_lateral img {
     width: 30px;
+}
+
+.bar_forum a img {
+    width: 60px;
 }
 
 .container {
@@ -170,6 +179,7 @@ button:hover {
     font-family: "Poppins";
     font-weight: 600;
 }
+
 .titulo img {
     width: 100px;
 }
@@ -177,14 +187,15 @@ button:hover {
 .exibicao {
     display: flex;
     justify-content: flex-start;
+    flex-direction: column;
     width: 800px;
     padding: 15px;
-    align-items: center;
+    justify-content: center;
     background-color: #2A2A2A;
     border-radius: 10px;
     font-family: "Inter";
     margin-bottom: 10px;
-
+    gap: 10px;
 }
 
 .exibicao img {
@@ -192,7 +203,7 @@ button:hover {
 }
 
 .exibicao a {
-    width: 100%;
+    width: auto;
     color: #fff;
     display: flex;
     align-items: center;
@@ -205,8 +216,8 @@ button:hover {
     justify-content: center;
     position: absolute;
     z-index: 999;
-    top: 100px;
-    left: 1280px;
+    top: 15%;
+    left: 90%;
     position: fixed;
 }
 
@@ -224,12 +235,12 @@ button:hover {
 
 .formulario_addArquivo {
     width: 500px;
-    background-color: aliceblue;
+    background-color: #fff;
     color: #121212;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 15px 0px 15px 0px;
     padding: 10px;
     gap: 20px;
     font-family: "Poppins";
@@ -242,13 +253,55 @@ button:hover {
 
 .formulario_addArquivo input {
     display: flex;
-    flex-direction: column;
 }
 
 .formulario_addArquivo button {
     background-color: #121212;
     color: #fff;
     width: 200px;
-    padding: 5px;
+    padding: 10px;
+    border-radius: 10px 0px 10px 0px;
+    font-weight: bold;
+}
+
+.input-file-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-family: "Poppins";
+}
+
+.custom-file-upload {
+    background-color: #121212;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+    border: 2px solid #fff;
+}
+
+.custom-file-upload:hover {
+    background-color: #2a2a2a;
+}
+
+#nome_arquivo {
+    font-size: 0.9rem;
+    color: #333;
+    display: flex;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.formulario_addArquivo textarea {
+    width: 90%;
+    height: 120px;
+    background-color: #121212;
+    height: 85%;
+    padding: 2%;
+    color: #FFFFFF;
     border-radius: 10px;
+    resize: none;
 }

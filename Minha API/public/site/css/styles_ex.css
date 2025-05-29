@@ -35,6 +35,7 @@ button:hover {
 .bar_p_e a,
 .bar_new a,
 .bar_e a,
+.bar_forum a,
 .bar_sair button {
   transition: .3s;
 }
@@ -43,6 +44,7 @@ button:hover {
 .bar_p_e a:hover,
 .bar_new a:hover,
 .bar_e a:hover,
+.bar_forum a:hover,
 .bar_sair button:hover {
   transform: scale(1.1);
   cursor: pointer;
@@ -51,7 +53,8 @@ button:hover {
 .bar_lateral {
   position: absolute;
   position: fixed;
-  font-family: "Keania One";
+  font-family: "Inter";
+  font-weight: 600;
   z-index: 999;
   width: 300px;
   height: 100%;
@@ -87,6 +90,7 @@ button:hover {
 }
 
 .bar_p_e a,
+.bar_forum a,
 .bar_new a,
 .bar_sair button {
   color: #ffffffff;
@@ -98,7 +102,6 @@ button:hover {
 
 .bar_p_e a {
   width: 150px;
-  border-bottom: #ffffffff solid 2px;
   margin-top: 150px;
   display: flex;
   align-items: center;
@@ -113,7 +116,20 @@ button:hover {
   gap: 10px;
 }
 
+.bar_forum a {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
 .bar_p,
+.bar_forum,
 .bar_new {
   margin-top: 10px;
 }
@@ -128,6 +144,9 @@ button:hover {
   width: 30px;
 }
 
+.bar_forum a img {
+  width: 60px;
+}
 
 .container {
   width: 95%;

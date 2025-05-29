@@ -31,10 +31,12 @@ button:hover {
     cursor: pointer;
 }
 
+
 .bar_nome_user a .div_nome_user,
 .bar_p_e a,
 .bar_new a,
 .bar_e a,
+.bar_forum a,
 .bar_sair button {
     transition: .3s;
 }
@@ -43,6 +45,7 @@ button:hover {
 .bar_p_e a:hover,
 .bar_new a:hover,
 .bar_e a:hover,
+.bar_forum a:hover,
 .bar_sair button:hover {
     transform: scale(1.1);
     cursor: pointer;
@@ -51,7 +54,8 @@ button:hover {
 .bar_lateral {
     position: absolute;
     position: fixed;
-    font-family: "Arial";
+    font-family: "Inter";
+    font-weight: 600;
     z-index: 999;
     width: 300px;
     height: 100%;
@@ -63,11 +67,6 @@ button:hover {
     box-shadow: #2a2a2a2a 10px 10px 10px 10px;
 }
 
-.bar_lateral button {
-    background: none;
-    border: none;
-}
-
 .bar_titulo {
     font-family: "Keania One";
     font-size: 2rem;
@@ -75,9 +74,7 @@ button:hover {
     display: flex;
 }
 
-
 .bar_nome_user a .div_nome_user {
-    font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     height: auto;
     color: #ffffffff;
@@ -94,42 +91,46 @@ button:hover {
 }
 
 .bar_p_e a,
-.bar_e a,
+.bar_forum a,
 .bar_new a,
 .bar_sair button {
     color: #ffffffff;
     font-size: 1.2rem;
     font-weight: 500;
-    cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
 
+    cursor: pointer;
 }
 
 .bar_p_e a {
+    width: 150px;
     margin-top: 150px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.bar_e a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
 .bar_new a,
-.bar_e a,
 .bar_sair button,
 .div_nome_user {
     display: flex;
     align-items: center;
     gap: 10px;
+}
 
+.bar_forum a {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+    border-radius: 10px;
 }
 
 .bar_p,
+.bar_forum,
 .bar_new {
     margin-top: 10px;
 }
@@ -140,8 +141,18 @@ button:hover {
     align-items: flex-end;
 }
 
+button {
+    background: none;
+    border: none;
+}
+
+
 .bar_lateral img {
     width: 30px;
+}
+
+.bar_forum a img {
+    width: 60px;
 }
 
 .container {

@@ -17,7 +17,7 @@
         <div class="bar_nome_user">
             <a href="perfil.html">
                 <div class="div_nome_user" id="div_nome_user">
-                    <img src="assets/imgs/perfil_branco.svg" alt="">
+                    <img src="assets/imgs/perfil.svg" alt="">
                 </div>
             </a>
         </div>
@@ -33,15 +33,15 @@
                 NEW POST
             </a>
         </div>
-        <div class="bar_e">
+        <div class="bar_new">
             <a href="dashboard.html">
                 <img src="assets/imgs/estatistica.svg" alt="">
                 ESTATÍSTICAS
             </a>
         </div>
-        <div class="bar_new">
-            <a href="dashboard.html">
-                <img src="assets/imgs/forum.png" alt="">
+        <div class="bar_forum">
+            <a href="forum.html">
+                <img src="assets/imgs/forum_dePartituras.png" alt="">
                 FÓRUM
             </a>
         </div>
@@ -106,7 +106,9 @@
                 </div>
 
                 <div class="descricao_do_perfil">
-                    <div class="div_editar" id="div_editar">
+                    <div class="div_editar" id="div_editar" style="display: none;">
+                        <input type="text" id="input_nova_desc" value="${descricaoUser}">
+                        <button onclick="enviarDescNova()" class="enviar_bio">ENVIAR</button>
                     </div>
                     ${descricaoUser}
                 </div>
@@ -394,11 +396,18 @@
                 })
         }
 
+        var contador_bio = 0
         function editar() {
             var descricaoUser = sessionStorage.DESCRICAO_USUARIO
-            div_editar.innerHTML = `
-        <input type="text" id="input_nova_desc" value="${descricaoUser}">
-        <button onclick="enviarDescNova()" class="enviar_bio">ENVIAR</button>`
+
+            if (contador_bio == 0) {
+                 div_editar.style.display = "flex"
+                contador_bio++
+            } else {
+                div_editar.style.display ="none"
+                contador_bio--
+            }
+        
         }
 
         function enviarDescNova() {
