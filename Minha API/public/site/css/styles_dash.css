@@ -296,18 +296,20 @@ button:hover {
     align-items: center;
     gap: 5px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-family: sans-serif;
 }
 
 .status_qtd span {
     color: #229d55;
     font-weight: 600;
+    font-size: 0.8rem;
 }
 
 .status_qtd .vermelho {
     color: #e74c3c;
     font-weight: 600;
+    font-size: 0.8rem;
 }
 
 .status_qtd img {

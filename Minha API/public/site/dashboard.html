@@ -152,15 +152,28 @@
                         var mensagem = ''
                         var imagem_status = ''
 
-                        if (atual > anterior) {
-                            imagem_status = 'assets/imgs/seta_verde.svg'
-                            mensagem = `<span>${atual} postagens nesta semana (${atual} é mais que ${anterior})<span>`
-                        } else if (atual < anterior) {
-                            imagem_status = 'assets/imgs/seta_vermelha.svg'
-                            mensagem = `<span class="vermelho">${atual} postagens nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                        if (atual === 1) {
+                            if (atual > anterior) {
+                                imagem_status = 'assets/imgs/seta_verde.svg'
+                                mensagem = `<span>${atual} postagem na última  (${atual} é maior que ${anterior})<span>`
+                            } else if (atual < anterior) {
+                                imagem_status = 'assets/imgs/seta_vermelha.svg'
+                                mensagem = `<span class="vermelho">${atual} postagem na última semana em que houve interação (menos que os ${anterior} da semana anterior)</span>`;
+                            } else {
+                                imagem_status = 'assets/imgs/igual.svg'
+                                mensagem = `${atual} postagem na última semana em que houve interação (mesma quantidade da anterior)`
+                            }
                         } else {
-                            imagem_status = 'assets/imgs/igual.svg'
-                            mensagem = `${atual} postagens nesta semana (mesma quantidade da anterior)`
+                            if (atual > anterior) {
+                                imagem_status = 'assets/imgs/seta_verde.svg'
+                                mensagem = `<span>${atual} postagens na última  (${atual} é maior que ${anterior})<span>`
+                            } else if (atual < anterior) {
+                                imagem_status = 'assets/imgs/seta_vermelha.svg'
+                                mensagem = `<span class="vermelho">${atual} postagens na última semana em que houve interação (menos que os ${anterior} da semana anterior)</span>`;
+                            } else {
+                                imagem_status = 'assets/imgs/igual.svg'
+                                mensagem = `${atual} postagens na última semana em que houve interação (mesma quantidade da anterior)`
+                            }
                         }
 
                         status_qtd_postagens.innerHTML = `
@@ -188,15 +201,28 @@
                         var mensagem = ''
                         var imagem_status = ''
 
-                        if (atual > anterior) {
-                            imagem_status = 'assets/imgs/seta_verde.svg'
-                            mensagem = `<span>${atual} curtidas nesta semana (${atual} é mais que ${anterior})</span>`
-                        } else if (atual < anterior) {
-                            imagem_status = 'assets/imgs/seta_vermelha.svg'
-                            mensagem = `<span class="vermelho">${atual} curtidas nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                        if (atual === 1) {
+                            if (atual > anterior) {
+                                imagem_status = 'assets/imgs/seta_verde.svg'
+                                mensagem = `<span>${atual} curtida na última semana em que houve interação (${atual} é maior que ${anterior})</span>`
+                            } else if (atual < anterior) {
+                                imagem_status = 'assets/imgs/seta_vermelha.svg'
+                                mensagem = `<span class="vermelho">${atual} curtida na última semana em que houve interação (menos que os ${anterior} da semana anterior)</span>`;
+                            } else {
+                                imagem_status = 'assets/imgs/igual.svg'
+                                mensagem = `${atual} curtida na última semana em que houve interação (mesma quantidade da anterior)`
+                            }
                         } else {
-                            imagem_status = 'assets/imgs/igual.svg'
-                            mensagem = `${atual} curtidas nesta semana (mesma quantidade da anterior)`
+                            if (atual > anterior) {
+                                imagem_status = 'assets/imgs/seta_verde.svg'
+                                mensagem = `<span>${atual} curtidas na última semana em que houve interação (${atual} é maior que ${anterior})</span>`
+                            } else if (atual < anterior) {
+                                imagem_status = 'assets/imgs/seta_vermelha.svg'
+                                mensagem = `<span class="vermelho">${atual} curtidas na última semana em que houve interação (menos que os ${anterior} da semana anterior)</span>`;
+                            } else {
+                                imagem_status = 'assets/imgs/igual.svg'
+                                mensagem = `${atual} curtidas na última semana em que houve interação (mesma quantidade da anterior)`
+                            }
                         }
 
                         status_qtd_curtidas.innerHTML = `
@@ -225,15 +251,28 @@
                         var mensagem = ''
                         var imagem_status = ''
 
-                        if (atual > anterior) {
-                            imagem_status = 'assets/imgs/seta_verde.svg'
-                            mensagem = `<span>${atual} comentarios nesta semana (${atual} é mais que ${anterior})</span>`
-                        } else if (atual < anterior) {
-                            imagem_status = 'assets/imgs/seta_vermelha.svg'
-                            mensagem = `<span class="vermelho">${atual} comentários nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                        if (atual === 1) {
+                            if (atual > anterior) {
+                                imagem_status = 'assets/imgs/seta_verde.svg'
+                                mensagem = `<span>${atual} comentario na última semana em que houve interação (${atual} é maior que ${anterior})</span>`
+                            } else if (atual < anterior) {
+                                imagem_status = 'assets/imgs/seta_vermelha.svg'
+                                mensagem = `<span class="vermelho">${atual} comentário na última semana em que houve interação (menos que os ${anterior} da semana anterior)</span>`;
+                            } else {
+                                imagem_status = 'assets/imgs/igual.svg'
+                                mensagem = `${atual} comentario na última semana em que houve interação (mesma quantidade da anterior)`
+                            }
                         } else {
-                            imagem_status = 'assets/imgs/igual.svg'
-                            mensagem = `${atual} comentarios nesta semana (mesma quantidade da anterior)`
+                            if (atual > anterior) {
+                                imagem_status = 'assets/imgs/seta_verde.svg'
+                                mensagem = `<span>${atual} comentarios na última semana em que houve interação (${atual} é maior que ${anterior})</span>`
+                            } else if (atual < anterior) {
+                                imagem_status = 'assets/imgs/seta_vermelha.svg'
+                                mensagem = `<span class="vermelho">${atual} comentários na última semana em que houve interação (menos que os ${anterior} da semana anterior)</span>`;
+                            } else {
+                                imagem_status = 'assets/imgs/igual.svg'
+                                mensagem = `${atual} comentarios na última semana em que houve interação (mesma quantidade da anterior)`
+                            }
                         }
 
                         status_qtd_comentarios.innerHTML = `
