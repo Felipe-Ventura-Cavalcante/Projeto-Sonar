@@ -237,10 +237,7 @@
 
         if (pesquisa == "") {
             listar()
-            // exibicao_arquivos.innerHTML = `
-            //         <div id="exibicao" class="exibicao">
-            //              NÃO POSSUI NENHUMA PUBLICAÇÃO DE ARQUIVOS COM ESSE NOME
-            //         </div>`
+
         } else {
 
             fetch(`/forum/pesquisa/${pesquisa}`)
