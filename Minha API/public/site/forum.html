@@ -57,6 +57,13 @@
             <img src="assets/imgs/partitura.png" alt="">
             FÓRUM DE PARTITURAS
         </div>
+        <div class="barra_pesquisa">
+            <input type="text" id="input_pesquisa" placeholder="Pesquisar" oninput="pesquisar()">
+            <div class="pesquisa_img">
+                <img src="assets/imgs/lupa.svg" alt="">
+            </div>
+
+        </div>
         <div id="exibicao_arquivos">
         </div>
         <div class="enviar_arquivo" id="enviar_arquivo">
@@ -123,8 +130,6 @@
                         var idArquivo = dados_arquivos[i].idArquivo
                         var nomeUser = dados_arquivos[i].nome_usuario
 
-                        console.log(extencaoArquivo)
-
                         exibicao_arquivos.innerHTML +=
                             `<div id="idArquivo${idArquivo}" class="exibicao">
                                 <div class="nomeUsuario">
@@ -136,7 +141,6 @@
                                 </a>
                             </div>`
                     }
-
                 }
             })
     }
@@ -226,4 +230,44 @@
         window.location = "../index.html"
     }
 
+
+    function pesquisar() {
+        var pesquisa = input_pesquisa.value
+        console.log(`esse é: ${pesquisa}`)
+
+        if (pesquisa == "") {
+            listar()
+            // exibicao_arquivos.innerHTML = `
+            //         <div id="exibicao" class="exibicao">
+            //              NÃO POSSUI NENHUMA PUBLICAÇÃO DE ARQUIVOS COM ESSE NOME
+            //         </div>`
+        } else {
+
+            fetch(`/forum/pesquisa/${pesquisa}`)
+                .then(res => res.json())
+                .then(dados_pesquisa => {
+                    console.log(dados_pesquisa)
+
+                    exibicao_arquivos.innerHTML = ``
+
+                    for (var i = 0; i < dados_pesquisa.length; i++) {
+                        var nome_doArquivo = dados_pesquisa[i].nome
+                        var extencaoArquivo = dados_pesquisa[i].extencao
+                        var idArquivo = dados_pesquisa[i].idArquivo
+                        var nomeUser = dados_pesquisa[i].nome_usuario
+
+                        exibicao_arquivos.innerHTML +=
+                            `<div id="idArquivo${idArquivo}" class="exibicao">
+                                <div class="nomeUsuario">
+                                    ${nomeUser}
+                                </div>
+                                <a href="../assets/arquivos_pdf/${extencaoArquivo}" download>
+                                    <img src="assets/imgs/logo_pdf.png" alt="">
+                                    ${nome_doArquivo}
+                                </a>
+                            </div>`
+                    }
+                })
+        }
+    }
 </script>

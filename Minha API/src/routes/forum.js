@@ -12,5 +12,8 @@ router.post('/enviarPdf', upload.single('arquivo_pdf'), (req, res) => {
   forumController.enviarPdf(req, res);
 })
 
+router.get("/pesquisa/:conteudo", function (req, res) {
+  forumController.pesquisa(req, res)
+})
 
 module.exports = router;

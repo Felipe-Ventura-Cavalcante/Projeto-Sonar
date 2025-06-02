@@ -174,7 +174,9 @@ button:hover {
     width: 100%;
     font-size: 2rem;
     font-weight: bolder;
-    padding: 50px;
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-bottom: 50px;
     margin-left: 100px;
     display: flex;
     align-items: center;
@@ -309,4 +311,37 @@ button:hover {
     color: #FFFFFF;
     border-radius: 10px;
     resize: none;
+}
+
+.barra_pesquisa {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.barra_pesquisa input {
+    width: 80%;
+    border: none;
+    background-color: #333333;
+    height: 40px;
+    border-radius: 10px 0px 0px 10px;
+    padding: 10px;
+    color: #fff;
+}
+
+.barra_pesquisa .pesquisa_img {
+    background-color: #333333;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5px;
+    border-radius: 0px 10px 10px 0px;
+    border-left: 2px solid #000;
+}
+
+.barra_pesquisa .pesquisa_img img {
+    width: 20px;
+    height: 20px;
 }

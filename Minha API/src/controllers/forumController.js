@@ -21,6 +21,27 @@ function listar(req, res) {
     )
 }
 
+function pesquisa(req, res) {
+  var pesquisa = req.params.conteudo
+
+  forumModel.pesquisa(pesquisa)
+
+    .then(
+      resultado => {
+        res.status(200).json(resultado)
+      }
+    ).catch(
+      function (erro) {
+        console.log(erro)
+        console.log(
+          "\nHouve um erro ao realizar a pesquisa de arquivos pdf! Erro: ",
+          erro.sqlMessage
+        )
+        res.status(500).json(erro.sqlMessage)
+      }
+    )
+}
+
 function enviarPdf(req, res) {
 
   var pdf = req.file.filename
@@ -46,5 +67,6 @@ function enviarPdf(req, res) {
 
 module.exports = {
   listar,
+  pesquisa,
   enviarPdf
 }
