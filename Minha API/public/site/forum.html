@@ -230,14 +230,12 @@
         window.location = "../index.html"
     }
 
-
     function pesquisar() {
         var pesquisa = input_pesquisa.value
         console.log(`esse é: ${pesquisa}`)
 
         if (pesquisa == "") {
             listar()
-
         } else {
 
             fetch(`/forum/pesquisa/${pesquisa}`)
