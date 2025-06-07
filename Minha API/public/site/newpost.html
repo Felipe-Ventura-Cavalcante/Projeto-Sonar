@@ -192,13 +192,17 @@
                     tudo_certo.innerHTML = ``
                 }, 4000)
             } else if (
-                !foto.value.endsWith(".png") &&
-                !foto.value.endsWith(".jpeg") &&
-                !foto.value.endsWith(".jpg") &&
-                !foto.value.endsWith(".gif") &&
-                !foto.value.endsWith(".webp") &&
-                !foto.value.endsWith(".mp4") &&
-                !foto.value.endsWith(".svg")) {
+                foto.value &&
+                !(
+                    foto.value.endsWith(".png") ||
+                    foto.value.endsWith(".jpeg") ||
+                    foto.value.endsWith(".jpg") ||
+                    foto.value.endsWith(".gif") ||
+                    foto.value.endsWith(".webp") ||
+                    foto.value.endsWith(".mp4") ||
+                    foto.value.endsWith(".svg")
+                )
+            ) {
 
                 tudo_certo.innerHTML = `Tipo de arquivo não suportado`
 
