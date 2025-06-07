@@ -136,8 +136,8 @@
         Olá, ${nomeUser}`
 
         function exibir() {
-            var arquivo = foto.files[0] // pega o arquivo selecionado
-            // uniformiso a URL para deixar ela toda em minúsculo
+            var arquivo = foto.files[0]
+
             var nomeArquivo = foto.value.toLowerCase();
 
             if (
@@ -154,7 +154,8 @@
                 tudo_certo.innerHTML = ``
 
                 if (nomeArquivo.endsWith(".mp4")) {
-                    // se for vídeo, transformo ele em URL para exibir a URL no search
+
+                    //Cria uma URL temporária (do tipo blob:) para vídeo
                     var urlVideo = URL.createObjectURL(arquivo)
                     imagem_post.innerHTML = `
                 <video controls>
@@ -162,15 +163,19 @@
                     Seu navegador não suporta a reprodução de vídeo.
                 </video>`
                 } else {
-                    // para imagem, usar FileReader e dataURL
+                    //Cria um FileReader, que permite ler o conteúdo do arquivo local para visualização (em vez de carregá-lo em um servidor).
                     var leitor = new FileReader()
 
+                    //Define uma função que será executada quando a leitura do arquivo terminar
+
+                    //e.target.result contém a imagem codificada em base64 (data URL), que é atribuída ao src de uma tag <img> para pré-visualização.
                     leitor.onload = function (e) {
                         imagem_post.innerHTML = `
                     <img src="${e.target.result}" alt="Prévia da imagem">`
                     }
 
                     leitor.readAsDataURL(arquivo)
+
                 }
             }
         }
@@ -187,7 +192,6 @@
                     tudo_certo.innerHTML = ``
                 }, 4000)
             } else if (
-                !foto.value.endsWith("") &&
                 !foto.value.endsWith(".png") &&
                 !foto.value.endsWith(".jpeg") &&
                 !foto.value.endsWith(".jpg") &&
@@ -196,7 +200,7 @@
                 !foto.value.endsWith(".mp4") &&
                 !foto.value.endsWith(".svg")) {
 
-                tudo_certo.innerHTML = `Nome do arquivo muito cumprido`
+                tudo_certo.innerHTML = `Tipo de arquivo não suportado`
 
                 setTimeout(() => {
                     tudo_certo.innerHTML = ``

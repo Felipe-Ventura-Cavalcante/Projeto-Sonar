@@ -175,3 +175,5 @@ INSERT INTO comentario (usuario_que_comentou, post_comentado, quem_postou, texto
 INSERT INTO comentario (usuario_que_comentou, post_comentado, quem_postou, texto_comentario, dtComentario) VALUES
 (3, 9, 2, 'Comentando aqui.', '2024-04-09'),
 (3, 11, 2, 'Interessante...', '2024-04-23');
+
+

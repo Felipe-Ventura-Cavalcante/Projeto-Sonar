@@ -444,16 +444,16 @@
             var div_comentario = document.getElementById(`comentario_aberto${idPost}`)
             var div = document.getElementById(`div_texto_comentario${idPost}`)
 
-            // Seleciona todos os elementos HTML que tem essa classe
+
             var todasDivsComentario = document.getElementsByClassName("texto_comentario");
             for (var i = 0; i < todasDivsComentario.length; i++) {
 
-                // Fecho todas as div de comentário que estão abertas
+
                 todasDivsComentario[i].innerHTML = "";
 
-                // estou pegando o numero do contador e colocando no id da minha div
+
                 var idAtual = todasDivsComentario[i].id.replace("div_texto_comentario", "");
-                // estou pegando a div específica que tem esse id
+
                 var iconeComentario = document.getElementById(`comentario_aberto${idAtual}`);
 
                 if (iconeComentario) {

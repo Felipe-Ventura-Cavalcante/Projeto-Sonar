@@ -108,7 +108,7 @@
 
                 </div>
                 <div class="status_qtd" id="status_qtd_comentarios">
-                    <img src="assets/imgs/seta_verde.svg" alt="">
+                    <img src="" alt="">
                 </div>
             </div>
 
@@ -231,12 +231,11 @@
                     } else if (curtidas.length === 1) {
                         status_qtd_curtidas.innerHTML = `
                     <img src="assets/imgs/seta_verde.svg" alt="">
-                    <span>${curtidas[0].qtd_curtida} curtidas nesta primeira semana</span>
-                `
+                    <span>${curtidas[0].qtd_curtida} curtidas nesta primeira semana</span>`
                     } else {
                         status_qtd_curtidas.innerHTML = `
                     <img src="assets/imgs/igual.svg" alt="">
-                    Nenhuma curtida registrada até agora.`
+                        Nenhuma curtida registrada até agora.`
                     }
                 })
 
@@ -285,7 +284,7 @@
                     } else {
                         status_qtd_comentarios.innerHTML = `
                     <img src="assets/imgs/igual.svg" alt="">
-                    Nenhum comentário registrada até agora.`
+                        Nenhum comentário registrada até agora.`
                     }
                 })
 

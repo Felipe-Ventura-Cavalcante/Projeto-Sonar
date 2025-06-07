@@ -42,7 +42,7 @@
         <div class="txt">senha</div>
         <input type="password" id="input_senha">
       </div>
-      <div id="div_erro"> </div>
+      <div id="div_erro" style="color: red;"> </div>
       <button onclick="logar()">Login</button>
       <div>Não tem uma conta ainda?
         <a href="cadastro.html">
@@ -64,7 +64,7 @@
     if (emailVar == `` || senhaVar == ``) {
       div_erro.innerHTML = `Preencha todos os campos`
     } else {
-      // Vá para routes.usuario
+
       fetch("/usuario/logar", {
         method: "POST",
         headers: {
@@ -76,20 +76,16 @@
         })
       })
 
-        // caso tudo der certo
         .then(function (resposta) {
           console.log("Estou no THEN do login()")
 
-          // se a resposta for 200
           if (resposta.ok) {
             console.log(resposta);
 
-            // le a resposta do servidor e transforma em json
             resposta.json().then(json => {
               console.log(json)
               console.log(JSON.stringify(json))
 
-              // armazena as informações para uma sessão
               sessionStorage.ID_USUARIO = json.idUsuario
               sessionStorage.NOME_USUARIO = json.nome
               sessionStorage.EMAIL_USUARIO = json.email
@@ -109,7 +105,6 @@
             })
           }
         })
-        // caso tudo der errado
         .catch(function (erro) {
           console.log(erro)
 

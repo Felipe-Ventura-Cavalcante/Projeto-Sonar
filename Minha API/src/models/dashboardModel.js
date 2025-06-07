@@ -66,7 +66,9 @@ function dash(idUsuario) {
 		FROM curtida
 		WHERE quem_postou = ${idUsuario}
 		GROUP BY semana
+
 		UNION
+        
 		SELECT 
 			YEARWEEK(dtComentario) AS semana,
 			0 AS qtd_curtida,
